@@ -1,0 +1,33 @@
+schema: spec-driven
+
+context: |
+  Write all repository artifacts in English.
+  This is a human-written Python learning project owned by an experienced Java engineer.
+  The owner writes application code and tests. Assistant documentation work does not authorize implementation.
+  Stack: Python 3.13, uv, FastAPI, Pydantic, SQLAlchemy async, asyncpg, Alembic and PostgreSQL.
+  Architecture decisions live in docs/adr; accepted decisions may describe future, unimplemented design.
+  Current work is PY-002 database support, followed by simple Stone CRUD through PY-006.
+  Current scope excludes UI changes, authentication, adoption workflows, photos, Redis, models and indexing.
+  GitHub Issues and the Stone Shelter Python project board own delivery status.
+  Change tasks track implementation steps; artifact completeness never means implementation is complete.
+  Historical product and Java requirements are context, not automatic scope for this Python implementation.
+
+rules:
+  proposal:
+    - Link the GitHub issue and state the current scope and exclusions.
+  specs:
+    - Describe observable guarantees with SHALL requirements and WHEN/THEN scenarios.
+    - Do not introduce future product behavior to satisfy a template.
+  design:
+    - Reference accepted ADRs and distinguish decisions from implementation evidence.
+  tasks:
+    - Leave implementation tasks unchecked until the owner implements and verifies them.
+    - Include focused tests with each behavior; do not add unrelated infrastructure.
+
+operations:
+  apply:
+    guidance:
+      - The owner implements code and tests manually; offer explanations and review unless explicitly asked to edit.
+  archive:
+    guidance:
+      - Archive only after implementation and verification are complete and the owner requests it.
