@@ -1,0 +1,24 @@
+# Local IDE state
+.idea/
+# Python caches and environments
+__pycache__/
+*.py[cod]
+.venv/
+# Local secrets
+.env
+.env.*
+!.env.example
+# Generated tool and test output
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+playwright-report/
+test-results/
+# Build output
+build/
+dist/
+*.egg-info/
+# Operating system files
+.DS_Store

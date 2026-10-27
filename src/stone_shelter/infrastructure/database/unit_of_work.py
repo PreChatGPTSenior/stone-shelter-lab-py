@@ -1,0 +1,1 @@
+"""SQLAlchemy Unit of Work implementation. Later implement the application transaction contract around the supplied session. Know nothing about catalog or adoption repositories; never commit automatically after a failed operation."""

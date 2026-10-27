@@ -1,0 +1,1 @@
+"""Future application submission use case. Later coordinate listing locking, eligibility checks, application creation and listing reservation in one Unit of Work. Do not modify catalog stone properties."""
