@@ -1,24 +1,13 @@
-from collections.abc import AsyncIterator
 from datetime import UTC, datetime
 from uuid import UUID, uuid4
 
 import httpx
 import pytest
-import pytest_asyncio
 from fastapi import FastAPI
 from sqlalchemy import delete, or_, select
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker
 
-from stone_shelter.bootstrap.app import create_app
 from stone_shelter.catalog.persistence.models import StoneModel
-
-
-@pytest_asyncio.fixture
-async def app() -> AsyncIterator[FastAPI]:
-    application = create_app()
-
-    async with application.router.lifespan_context(application):
-        yield application
 
 
 @pytest.mark.asyncio

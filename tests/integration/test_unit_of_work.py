@@ -13,8 +13,10 @@ from stone_shelter.settings import DatabaseSettings
 
 
 @pytest_asyncio.fixture
-async def database_table() -> AsyncIterator[tuple[AsyncEngine, Table]]:
-    engine = create_database_engine(DatabaseSettings())
+async def database_table(
+    migrated_database: DatabaseSettings,
+) -> AsyncIterator[tuple[AsyncEngine, Table]]:
+    engine = create_database_engine(migrated_database)
     metadata = MetaData()
     table = Table(
         f"uow_test_{uuid4().hex}",
