@@ -7,9 +7,10 @@ from stone_shelter.settings import DatabaseSettings
 
 
 @pytest.mark.asyncio
-async def test_application_db_engine() -> None:
-    settings = DatabaseSettings()
-    engine = create_database_engine(settings)
+async def test_application_db_engine(
+    migrated_database: DatabaseSettings,
+) -> None:
+    engine = create_database_engine(migrated_database)
     try:
         async with engine.connect() as connection:
             result = await connection.execute(text("SELECT 1"))
@@ -19,9 +20,10 @@ async def test_application_db_engine() -> None:
 
 
 @pytest.mark.asyncio
-async def test_create_session_factory() -> None:
-    settings = DatabaseSettings()
-    engine = create_database_engine(settings)
+async def test_create_session_factory(
+    migrated_database: DatabaseSettings,
+) -> None:
+    engine = create_database_engine(migrated_database)
     session_factory = create_session_factory(engine)
     try:
         async with session_factory() as session:
