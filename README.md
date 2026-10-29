@@ -1,8 +1,8 @@
 # Stone Shelter Python Backend
 
-The project has a running FastAPI bootstrap, validated PostgreSQL settings, an async engine and session factory, an explicit Unit of Work, and an Alembic migration environment. Unit and PostgreSQL integration tests cover the implemented infrastructure. Business CRUD is not implemented yet.
+The project has a running FastAPI application, validated PostgreSQL settings, an async engine and session factory, an explicit Unit of Work, and an Alembic migration environment. Stone creation is implemented through `POST /api/v1/stones`, returning HTTP 201 with only the generated UUID. Unit and PostgreSQL integration tests cover infrastructure, successful creation, and invalid-input scenarios. Read, update, delete, and adoption workflows are not implemented yet.
 
-Current work: [PY-002 Database support](https://github.com/PreChatGPTSenior/stone-shelter-lab-py/issues/2), on branch `PY-002-db-support`.
+Current work: [PY-003 Create stone](https://github.com/PreChatGPTSenior/stone-shelter-lab-py/issues/3), on branch `PY-003-create-stone`. The issue records completed criteria and explicitly deferred verification.
 
 Planning and rationale: [OpenSpec workflow](openspec/README.md), [PY-002 proposal](openspec/changes/py-002-db-support/proposal.md), [architecture decisions](docs/adr/README.md), and [GitHub board](https://github.com/users/PreChatGPTSenior/projects/1/views/1).
 

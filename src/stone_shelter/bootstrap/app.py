@@ -5,6 +5,7 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 
+from stone_shelter.catalog.api.router import router as catalog_router
 from stone_shelter.infrastructure.database.engine import create_database_engine
 from stone_shelter.infrastructure.database.session import create_session_factory
 from stone_shelter.settings import DatabaseSettings
@@ -28,5 +29,7 @@ def create_app() -> FastAPI:
         version="0.1.0",
         lifespan=lifespan,
     )
+
+    app.include_router(catalog_router)
 
     return app
