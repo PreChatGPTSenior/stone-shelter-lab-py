@@ -1,7 +1,10 @@
 # Stone Shelter Python Backend
 
-This branch contains a documentation-only Python project scaffold.
-No application behavior, domain entities, dependencies or tools are implemented or configured yet.
+The project has a running FastAPI bootstrap, validated PostgreSQL settings, an async engine and session factory, an explicit Unit of Work, and an Alembic migration environment. Unit and PostgreSQL integration tests cover the implemented infrastructure. Business CRUD is not implemented yet.
+
+Current work: [PY-002 Database support](https://github.com/PreChatGPTSenior/stone-shelter-lab-py/issues/2), on branch `PY-002-db-support`.
+
+Planning and rationale: [OpenSpec workflow](openspec/README.md), [PY-002 proposal](openspec/changes/py-002-db-support/proposal.md), [architecture decisions](docs/adr/README.md), and [GitHub board](https://github.com/users/PreChatGPTSenior/projects/1/views/1).
 
 ## Layout
 
@@ -11,7 +14,7 @@ No application behavior, domain entities, dependencies or tools are implemented 
 - `src/stone_shelter/bootstrap`: application assembly and dependency wiring.
 - `src/stone_shelter/api`: cross-module HTTP entry points and error translation.
 - `src/stone_shelter/infrastructure/database`: shared database plumbing and Unit of Work implementation.
-- `migrations`: future Alembic migration environment and revisions.
+- `migrations`: Alembic migration environment and revisions.
 - `tests`: unit, integration and browser end-to-end tests.
 - `docs`: accepted project documents.
 
@@ -19,6 +22,8 @@ No application behavior, domain entities, dependencies or tools are implemented 
 
 The composition root will bind participating adapters and the Unit of Work to one session per use-case execution. The coordinating use case owns commit. Module operations and repositories do not commit independently. Stone properties and adoption listing availability remain separate.
 
-## Future setup
+## Local development
 
-Populate `pyproject.toml` when configuring the project. Generate `uv.lock` with uv after dependencies are selected and resolved; a fabricated lockfile is intentionally not included. Add runnable setup and test instructions here when implementation begins.
+See the [local setup instructions](docs/setup.md) for environment configuration, infrastructure startup, migrations, application startup, and development checks.
+
+The owner writes application code and tests manually; OpenSpec is used to record and validate plans, not to authorize automatic implementation.

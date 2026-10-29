@@ -1,1 +1,22 @@
-"""Application configuration. Later define validated settings with pydantic-settings. Read environment configuration without committing secrets."""
+"""Application configuration. Define validated settings with pydantic-settings. Read environment configuration without committing secrets."""
+
+from pydantic import Field, SecretStr
+from pydantic_settings import BaseSettings, SettingsConfigDict
+
+
+class DatabaseSettings(BaseSettings):
+    """PostgreSQL connection settings."""
+
+    model_config = SettingsConfigDict(
+        env_prefix="POSTGRES_",
+        env_file=".env",
+        env_file_encoding="utf-8",
+        extra="ignore",
+        hide_input_in_errors=True,
+    )
+
+    host: str = Field(min_length=1)
+    port: int = Field(ge=1, le=65535)
+    db: str = Field(min_length=1)
+    user: str = Field(min_length=1)
+    password: SecretStr = Field(min_length=1)
