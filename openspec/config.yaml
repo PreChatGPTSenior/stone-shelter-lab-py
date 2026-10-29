@@ -2,12 +2,19 @@ schema: spec-driven
 
 context: |
   Write all repository artifacts in English.
+  Domain premise: a fictional world where stones are pets, not a scientifically realistic geology product. Staff-authored personalities, health, experiences and wishes are valid fictional domain data. Distinguish fictional world rules from geological reference material.
   This is a human-written Python learning project owned by an experienced Java engineer.
   The owner writes application code and tests. Assistant documentation work does not authorize implementation.
   Stack: Python 3.13, uv, FastAPI, Pydantic, SQLAlchemy async, asyncpg, Alembic and PostgreSQL.
   Architecture decisions live in docs/adr; accepted decisions may describe future, unimplemented design.
-  Current work is PY-002 database support, followed by simple Stone CRUD through PY-006.
-  Current scope excludes UI changes, authentication, adoption workflows, photos, Redis, models and indexing.
+  PY-002 database support and PY-003 stone creation are merged; explicitly deferred verification remains open.
+  ADR-0006 and docs/requirements/rag-learning.md record the new learning direction: supplier batches, retrieval, RAG, tools, LangChain, LangGraph, evaluation, and a later Spring AI comparison.
+  ADR-0007 defines a staff-facing multi-shelter hub and one lifetime ShelterCase per Stone, with an externally assigned global case UUID and immutable searchable case number. Returns and transfers preserve case identity; a transfer changes the current shelter. Accepted statuses are UNDER_REVIEW, AVAILABLE, RESERVED and ADOPTED; returns go to UNDER_REVIEW and direct adoption from AVAILABLE is allowed. Lifecycle code and remaining transfer/import rules are not implemented.
+  ADR-0008 accepts batch creation, single-stone partial updates, externally supplied Stone UUIDs, source-time/content comparison, hub-recorded changes, and two database-backed Shelter records. Trust upstream business consistency while retaining boundary validation. Exact payloads and timestamp/batch edge cases remain open.
+  ADR-0009 accepts individual Stone profile concepts: staff-assigned socialization enum set, care category, free-text health description, triggers/experiences and preferred environment. Compatibility belongs to a separate fictional Markdown document to be authored later. Exact enum vocabulary and storage are not implemented.
+  Full CRUD and UI completion are not prerequisites. The Delete plan is superseded: stones/cases remain in the system and state is updated. Establish entities and basic population before discussing search design.
+  RAG, trigger data, supplier ingestion, and agent behavior are planned, not implemented; do not install or implement them merely because they appear in the learning backlog.
+  UI integration, authentication, chatbot-driven adoption writes, photos, Redis, Kafka, Hypothesis, and true token streaming remain deferred unless a specific increment is authorized. Adoption/accounting data is planned through external JSON ingestion, not implemented by these decisions.
   GitHub Issues and the Stone Shelter Python project board own delivery status.
   Change tasks track implementation steps; artifact completeness never means implementation is complete.
   Historical product and Java requirements are context, not automatic scope for this Python implementation.
