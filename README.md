@@ -1,33 +1,55 @@
-# Stone Shelter Python Backend
+ 🪨 Stone Shelter Lab
+----
+*An experimental RAG laboratory disguised as a pet adoption shelter for rocks.*
+----
+A learning project by a Java architect with 13+ years of enterprise experience who decided to learn Python by actually writing Python.
 
-Stone Shelter is set in a fictional world where stones are pets. Their staff-authored personalities, care needs, experiences and family wishes are intentional domain data, distinct from the geological reference material.
+**Yes. By hand. In 2026.**
+<i>(The documentation? AI-generated, of course. Let's not get carried away.)</i>
 
-The project has a running FastAPI application, validated PostgreSQL settings, an async engine and session factory, an explicit Unit of Work, and an Alembic migration environment. Stone creation is implemented through `POST /api/v1/stones`, returning HTTP 201 with only the generated UUID. Unit and PostgreSQL integration tests cover infrastructure, successful creation, and invalid-input scenarios. Read, update, delete, and adoption workflows are not implemented yet.
 
-Completed foundation: [PY-002 Database support](https://github.com/PreChatGPTSenior/stone-shelter-lab-py/issues/2) and [PY-003 Create stone](https://github.com/PreChatGPTSenior/stone-shelter-lab-py/issues/3), merged into `master`. Their issues record explicitly deferred verification.
+## 🧪 What Are We Actually Building?
 
-The next learning focus is retrieval, RAG, tools, LangChain, LangGraph, and evaluation, with a later Spring AI comparison. Full CRUD and UI completion are no longer prerequisites. See [ADR-0006](docs/adr/0006-rag-and-agent-learning-focus.md) and the [requirements and learning backlog](docs/requirements/rag-learning.md). The [curated encyclopedia](stone-rules/stone-encyclopedias/README.md) is already imported; retrieval and agent behavior are not implemented yet.
+Behind the geological nonsense is an AI engineering playground for exploring:
 
-Planning and rationale: [OpenSpec workflow](openspec/README.md), [PY-002 proposal](openspec/changes/py-002-db-support/proposal.md), [architecture decisions](docs/adr/README.md), and [GitHub board](https://github.com/users/PreChatGPTSenior/projects/1/views/1).
+- **RAG:** Structured data meets knowledge retrieved from documents.
+- **Retrieval & Embeddings:** Semantic search, hybrid retrieval, ranking, and relevance.
+- **Tool Calling:** Letting LLMs ask application services for actual facts instead of confidently inventing them.
+- **LangChain & LangGraph:** Retrieval pipelines, stateful workflows, and agent orchestration.
+- **Evaluation:** Deterministic checks, LLM-as-a-Judge, retrieval quality, and reproducible tests.
+- **Langfuse:** Tracing, observability, and finding out exactly where the AI went wrong.
 
-## Layout
+## 🏠 The Domain: A Shelter for Pet Rocks
 
-- `src/stone_shelter/catalog`: specimen properties and catalog operations.
-- `src/stone_shelter/adoption`: listings, applications and adoption lifecycle.
-- `src/stone_shelter/application`: cross-module use cases and the transaction contract.
-- `src/stone_shelter/bootstrap`: application assembly and dependency wiring.
-- `src/stone_shelter/api`: cross-module HTTP entry points and error translation.
-- `src/stone_shelter/infrastructure/database`: shared database plumbing and Unit of Work implementation.
-- `migrations`: Alembic migration environment and revisions.
-- `tests`: unit, integration and browser end-to-end tests.
-- `docs`: accepted project documents.
+Every rock is an individual. Obviously.
 
-## Transaction boundary
+Rocks have physical characteristics, psychological triggers, personalities, and socialization traits.
 
-The composition root will bind participating adapters and the Unit of Work to one session per use-case execution. The coordinating use case owns commit. Module operations and repositories do not commit independently. Stone properties and adoption listing availability remain separate.
+Two encyclopedias provide the knowledge:
 
-## Local development
+- **Geological Encyclopedia**
+- **Rock Compatibility Encyclopedia**
 
-See the [local setup instructions](docs/setup.md) for environment configuration, infrastructure startup, migrations, application startup, and development checks.
+Rocks also have histories. They arrive, become available for adoption, get reserved, find families, return to the shelter, and move between shelters.
 
-The owner writes application code and tests manually; OpenSpec is used to record and validate plans, not to authorize automatic implementation.
+**The rocks are fictional. The engineering problems aren't.**
+
+## 🐍 Why Python?
+
+Because an experienced engineer should occasionally suffer in a new programming language.
+
+## ⚠️ Project Status
+
+**Work in progress.**
+
+Built incrementally as a hands-on Python and AI engineering laboratory.
+
+Architecture decisions, domain rules, planned experiments, and implemented features are tracked separately.
+
+A documented idea is not an implemented feature.
+
+A green test is not proof of good architecture.
+
+A confident LLM answer is not evidence.
+
+**And apparently, 13 years of Java don't make Python's `_` any less suspicious.** 
