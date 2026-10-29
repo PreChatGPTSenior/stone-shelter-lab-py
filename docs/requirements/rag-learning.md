@@ -55,14 +55,24 @@ Update: section 3.1 and [ADR-0007](../adr/0007-lifetime-shelter-case-identity.md
 
 ## 3. Information sources and future ingestion
 
-**Accepted direction:** keep catalog instances and curated encyclopedia knowledge separate.
+**Accepted direction:** combine operational pet data with distinct reference sources. The encyclopedia, type-compatibility guide, and future astral catalog are separate documents or corpora, not fields to duplicate on every stone.
 
-| Source | Responsibility |
-| --- | --- |
-| Catalog | Which individual stones exist, their IDs and specimen properties |
-| Encyclopedia | General knowledge about rock types, conditions, care, and caveats |
-| Future specimen observations | Individual cracks, treatments, coatings, or other evidence that may override typical type-level assumptions |
-| Fictional personality | Playful presentation, never an unsupported scientific or healing claim |
+| Source | Responsibility | Status |
+| --- | --- | --- |
+| Operational database | Individual stones, profiles, current case state, shelter information, and gradually accumulated life events | Existing catalog foundation; expanded domain agreed in the [domain model](../domain/model.md), implementation pending |
+| Stone encyclopedia | General knowledge about rock types, conditions, care, and caveats; preserve the corpus distinction between geology and fictional material | English Markdown corpus already imported; retrieval not implemented |
+| Type-compatibility guide | Authored fictional rules for different stone types living together | Accepted separate Markdown source; content and retrieval not implemented |
+| Astral compatibility catalog | An additional fictional compatibility system for future playful selection experiments | Deferred; no content, schema, or integration required now |
+
+Individual profiles and events are legitimate facts about pets in this fictional world. They are not merely decorative personality text, and general type-level guidance does not by itself establish an individual's suitability.
+
+Requirements for combining these sources:
+
+- Preserve source identity, version, and document/section or event identifiers so explanations can distinguish a general encyclopedia statement, a fictional compatibility rule, and a staff observation.
+- Use current database state for availability and shelter responsibility. A compatibility document or historical event must not override authoritative current availability.
+- Combine general knowledge with individual profiles and relevant life events. A generally compatible type pair does not guarantee that two particular pets are a suitable match.
+- Do not silently merge fictional compatibility systems into geological claims or invent rules missing from the authored references.
+- Exact routing, conflict precedence, and whether future astral rules are explicitly requested or enabled through an experiment setting remain search-design decisions.
 
 **Planned capabilities:**
 
@@ -230,6 +240,17 @@ The following remain optional examples of physical/contextual questions, not the
 | Care effort | Occasional dusting only | Does the available guidance fit the user's stated effort? |
 
 Do not flatten nuanced geological evidence into unconditional claims, and do not manufacture profile observations for every type to fill the database. An authored fictional fear is valid within the game world even without a physical basis; explain it as a profile observation rather than forcing a scientific justification.
+
+### 4.3 Future astral compatibility catalog
+
+**Accepted future source; deferred implementation.** Add a separate authored reference catalog of fictional astral compatibility rules as a playful extension of the pet-stone world.
+
+- Keep this catalog distinct from both the encyclopedia and the type-compatibility guide, with its own source identity and version.
+- No astral rules, compatibility matrix, new pet attributes, or required ingestion fields are defined by this decision.
+- Do not create catalog content, install tools, or implement retrieval for it now. Its inclusion does not block the first encyclopedia and type-compatibility experiments.
+- Later experiments may compare selection with and without this additional rule system and inspect which source supports each recommendation.
+- Required attributes, rule vocabulary, activation behavior, and conflict handling remain open until the catalog is designed.
+- Present its rules as authored facts of the fictional world, not scientific or medical claims.
 
 ## 5. Assistant behavior
 
