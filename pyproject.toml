@@ -34,6 +34,7 @@ dev = [
 target-version = "py313"
 line-length = 100
 src = ["src"]
+fix = true
 
 [tool.ruff.lint]
 select = [
@@ -51,13 +52,16 @@ quote-style = "double"
 indent-style = "space"
 line-ending = "lf"
 
+
 [tool.mypy]
 python_version = "3.13"
-files = ["src", "tests"]
+files = ["src", "tests", "migrations"]
 strict = true
 show_error_codes = true
 pretty = true
+explicit_package_bases = true
 plugins = ["pydantic.mypy"]
+mypy_path = "$MYPY_CONFIG_FILE_DIR/src"
 
 [tool.pydantic-mypy]
 init_typed = true

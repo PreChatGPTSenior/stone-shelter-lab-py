@@ -11,8 +11,8 @@ async def test_application_serves_openapi() -> None:
     transport = httpx.ASGITransport(app=app)
 
     async with httpx.AsyncClient(
-            transport=transport,
-            base_url="http://test",
+        transport=transport,
+        base_url="http://test",
     ) as client:
         response = await client.get("/openapi.json")
 

@@ -1,6 +1,6 @@
 # Stone Shelter Python Backend
 
-The project has a running FastAPI bootstrap, a generated OpenAPI endpoint and its first integration test. Python dependencies and development checks are managed through uv. Business CRUD and application database wiring are not implemented yet.
+The project has a running FastAPI bootstrap, validated PostgreSQL settings, an async engine and session factory, an explicit Unit of Work, and an Alembic migration environment. Unit and PostgreSQL integration tests cover the implemented infrastructure. Business CRUD is not implemented yet.
 
 Current work: [PY-002 Database support](https://github.com/PreChatGPTSenior/stone-shelter-lab-py/issues/2), on branch `PY-002-db-support`.
 
@@ -14,7 +14,7 @@ Planning and rationale: [OpenSpec workflow](openspec/README.md), [PY-002 proposa
 - `src/stone_shelter/bootstrap`: application assembly and dependency wiring.
 - `src/stone_shelter/api`: cross-module HTTP entry points and error translation.
 - `src/stone_shelter/infrastructure/database`: shared database plumbing and Unit of Work implementation.
-- `migrations`: future Alembic migration environment and revisions.
+- `migrations`: Alembic migration environment and revisions.
 - `tests`: unit, integration and browser end-to-end tests.
 - `docs`: accepted project documents.
 
@@ -24,18 +24,6 @@ The composition root will bind participating adapters and the Unit of Work to on
 
 ## Local development
 
-```sh
-uv sync --locked
-uv run uvicorn stone_shelter.main:app --reload --host 127.0.0.1 --port 8000
-```
+See the [local setup instructions](docs/setup.md) for environment configuration, infrastructure startup, migrations, application startup, and development checks.
 
-The bootstrap serves `/docs` and `/openapi.json`. It does not yet connect to PostgreSQL. Infrastructure setup is documented in [infra/README.md](infra/README.md).
-
-```sh
-uv run ruff check .
-uv run ruff format --check .
-uv run mypy
-uv run pytest tests/integration/test_application.py
-```
-
-The existing formatter findings remain separate from this documentation change. The owner writes application code and tests manually; OpenSpec is used to record and validate plans, not to authorize automatic implementation.
+The owner writes application code and tests manually; OpenSpec is used to record and validate plans, not to authorize automatic implementation.

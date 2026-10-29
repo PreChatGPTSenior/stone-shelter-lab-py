@@ -1,1 +1,7 @@
-"""Database session factory. Later configure AsyncSession creation. Each independent concurrent use case receives its own session."""
+"""Database session factory. Configure AsyncSession creation. Each independent concurrent use case receives its own session."""
+
+from sqlalchemy.ext.asyncio import AsyncEngine, AsyncSession, async_sessionmaker
+
+
+def create_session_factory(engine: AsyncEngine) -> async_sessionmaker[AsyncSession]:
+    return async_sessionmaker(bind=engine, expire_on_commit=False)
