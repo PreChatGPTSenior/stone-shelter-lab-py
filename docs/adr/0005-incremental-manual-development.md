@@ -4,6 +4,8 @@
 - Date: 2026-10-27
 - Tracking: [PY-002](https://github.com/PreChatGPTSenior/stone-shelter-lab-py/issues/2)
 
+Update 2026-10-29: [ADR-0006](0006-rag-and-agent-learning-focus.md) supersedes the CRUD-first sequencing and blanket deferral of answer-quality evaluation below. The original decision is retained as history; the manual implementation agreement remains in effect.
+
 ## Context
 
 The owner is an experienced Java engineer learning Python and its frameworks by writing the application manually. The historical product specification is broader than the next useful learning increment.

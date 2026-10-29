@@ -1,8 +1,12 @@
 # Stone Shelter Python Backend
 
+Stone Shelter is set in a fictional world where stones are pets. Their staff-authored personalities, care needs, experiences and family wishes are intentional domain data, distinct from the geological reference material.
+
 The project has a running FastAPI application, validated PostgreSQL settings, an async engine and session factory, an explicit Unit of Work, and an Alembic migration environment. Stone creation is implemented through `POST /api/v1/stones`, returning HTTP 201 with only the generated UUID. Unit and PostgreSQL integration tests cover infrastructure, successful creation, and invalid-input scenarios. Read, update, delete, and adoption workflows are not implemented yet.
 
-Current work: [PY-003 Create stone](https://github.com/PreChatGPTSenior/stone-shelter-lab-py/issues/3), on branch `PY-003-create-stone`. The issue records completed criteria and explicitly deferred verification.
+Completed foundation: [PY-002 Database support](https://github.com/PreChatGPTSenior/stone-shelter-lab-py/issues/2) and [PY-003 Create stone](https://github.com/PreChatGPTSenior/stone-shelter-lab-py/issues/3), merged into `master`. Their issues record explicitly deferred verification.
+
+The next learning focus is retrieval, RAG, tools, LangChain, LangGraph, and evaluation, with a later Spring AI comparison. Full CRUD and UI completion are no longer prerequisites. See [ADR-0006](docs/adr/0006-rag-and-agent-learning-focus.md) and the [requirements and learning backlog](docs/requirements/rag-learning.md). The [curated encyclopedia](stone-rules/stone-encyclopedias/README.md) is already imported; retrieval and agent behavior are not implemented yet.
 
 Planning and rationale: [OpenSpec workflow](openspec/README.md), [PY-002 proposal](openspec/changes/py-002-db-support/proposal.md), [architecture decisions](docs/adr/README.md), and [GitHub board](https://github.com/users/PreChatGPTSenior/projects/1/views/1).
 

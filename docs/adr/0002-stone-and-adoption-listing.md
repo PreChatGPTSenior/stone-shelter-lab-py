@@ -5,6 +5,8 @@
 - Tracking: [PY-002 architecture context](https://github.com/PreChatGPTSenior/stone-shelter-lab-py/issues/2)
 - Implementation: Deferred; not part of PY-002 through PY-006
 
+Update 2026-10-29: [ADR-0007](0007-lifetime-shelter-case-identity.md) replaces the proposed AdoptionListing with a lifetime ShelterCase and settles case identity across returns and transfers. The separation of Stone properties from adoption/accounting state remains accepted. The original proposal below is retained as history.
+
 ## Context
 
 A stone is a specimen with its own properties. Availability for adoption belongs to a shelter process, and a reservation application has its own lifecycle.
