@@ -10,6 +10,7 @@ class CareLevel(StrEnum):
     ADDITIONAL = "ADDITIONAL"
     INTENSIVE = "INTENSIVE"
 
+
 class SocializationTrait(StrEnum):
     PREFERS_SOLITUDE = "PREFERS_SOLITUDE"
     ENJOYS_HUMAN_COMPANY = "ENJOYS_HUMAN_COMPANY"
@@ -30,5 +31,3 @@ class StoneProfile:
     socialization_traits: set[SocializationTrait] = field(
         default_factory=set,
     )
-
-

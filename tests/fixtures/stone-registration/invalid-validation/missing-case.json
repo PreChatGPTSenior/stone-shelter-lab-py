@@ -1,0 +1,13 @@
+{
+  "stone": {
+    "externalId": "b32fbc0b-6bfb-4cee-acd7-1151b7b6d4a9",
+    "name": "Invalid Test Stone",
+    "stoneType": "BASALT",
+    "stoneSize": "MEDIUM",
+    "biography": "Invalid Test Stone is a beloved resident of the fictional pet stone world."
+  },
+  "profile": {
+    "careLevel": "ADDITIONAL",
+    "healthNotes": "Test-only profile for rollback verification."
+  }
+}

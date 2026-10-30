@@ -18,7 +18,8 @@
         "occurredAt": "2026-10-30T09:30:00Z",
         "eventNotes": "Accepted into shelter P2 and made available for adoption. Staff noted a preference for calm surroundings."
       }
-    ]
+    ],
+    "adoptionStatus": "AVAILABLE"
   },
   "profile": {
     "socializationTraits": [

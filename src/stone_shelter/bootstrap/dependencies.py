@@ -5,21 +5,21 @@ from collections.abc import AsyncIterator
 from fastapi import Request
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker
 
-from stone_shelter.catalog.application.create_stone import CreateStoneService
+from stone_shelter.application.register_stone import RegisterStoneService
 from stone_shelter.catalog.persistence.repository import SqlAlchemyStoneRepository
 from stone_shelter.infrastructure.database.unit_of_work import SqlAlchemyUnitOfWork
 
 
-async def get_create_stone_service(
+async def get_register_stone_service(
     request: Request,
-) -> AsyncIterator[CreateStoneService]:
+) -> AsyncIterator[RegisterStoneService]:
     session_factory: async_sessionmaker[AsyncSession] = request.app.state.session_factory
 
     uow = SqlAlchemyUnitOfWork(session_factory)
 
     async with uow:
         repository = SqlAlchemyStoneRepository(uow.session)
-        service = CreateStoneService(
+        service = RegisterStoneService(
             repository=repository,
             uow=uow,
         )

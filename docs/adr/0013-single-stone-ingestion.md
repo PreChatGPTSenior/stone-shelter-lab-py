@@ -1,10 +1,10 @@
 # ADR-0013 Register one stone and its complete case per request
 
-- Status: Accepted; DTOs updated, application processing pending
+- Status: Accepted; source-owned current status clarified by [ADR-0015](0015-source-owned-adoption-status.md)
 - Date: 2026-10-30
 - Tracking: [PY-009](https://github.com/PreChatGPTSenior/stone-shelter-lab-py/issues/10)
 - Supersedes: The multi-stone API batch and batch-wide transaction decisions in [ADR-0010](0010-py-009-test-data-preparation.md)
-- Preserves: The educational happy-path assumptions, [direct DTO-to-ORM mapping](0011-dto-to-orm-without-domain-dataclasses.md), and [clean Testcontainers policy](0012-clean-testcontainers-only-development.md)
+- Preserves: The educational happy-path assumptions, [direct DTO-to-ORM mapping](0011-dto-to-orm-without-domain-dataclasses.md), and [Testcontainers test isolation](0012-clean-testcontainers-only-development.md), with persistent local application data permitted by [ADR-0014](0014-persistent-local-application-database.md)
 
 ## Context
 
@@ -23,7 +23,7 @@ The case can contain accumulated history, not only its admission event. Bound th
 - A missing or empty list remains a normal structural validation failure. For valid event objects, the size validator runs before the admission-presence validator; an oversized list reports the limit error first.
 - Pydantic includes these codes and contexts in its validation errors. A future FastAPI `RequestValidationError` handler can translate them into the agreed API error representation. No custom handler is added in this increment; HTTP status and the final response envelope remain separate decisions. The sender can distinguish the two conditions without interpreting message text. Repeating an unchanged oversized request is not a remedy.
 - A creation request may carry the case's accumulated coherent history. The existing event types encode status operations and the two shelter-transfer directions; no separate transition or transfer-route fields are added.
-- Keep adoption status application-owned. Processing starts from AVAILABLE and uses the supplied history to establish the resulting state; clients do not supply a separate current-status field in the creation DTO. Chronological processing belongs to the future application logic, not array-position validation in the DTO.
+- Require source-owned `shelterCase.adoptionStatus` as an AdoptionStatus enum. Persist it directly with the case and store history separately; do not derive status from event timestamps, array order, or event-to-status mappings. This supersedes the earlier application-owned status calculation under [ADR-0015](0015-source-owned-adoption-status.md).
 - Persist one stone, its case, optional profile, and all supplied case events atomically in one Unit of Work.
 - To register multiple stones, the emulator reads separate per-stone fixture files and sends separate requests. Iterating a fixture directory does not create an API batch contract.
 - Keep a separate single-case event operation as a future capability for adding later history. Its DTO, name, and limits are not implemented in this creation-only increment; the previously introduced `CaseEventsCreateRequest` has been removed.
@@ -36,7 +36,7 @@ The case can contain accumulated history, not only its admission event. Bound th
 - Store reusable English-language registration data under `fixtures/stones/` at the repository root. These inputs support the upstream emulator and future retrieval experiments, not only automated tests.
 - Use one JSON file per stone. Name it `<stone.externalId>.json`; the filename stem must match the UUID inside `stone.externalId`.
 - Each file is one complete `StoneRegistrationRequest` with required `stone` and `shelterCase` objects and an optional `profile`. Do not wrap it in an array or an `items` object.
-- Include the case's event history in `shelterCase.events`. It must be nonempty, contain ADMITTED in any position, and respect the 100-event business limit.
+- Include the source-provided current state in `shelterCase.adoptionStatus` and the case's event history in `shelterCase.events`. It must be nonempty, contain ADMITTED in any position, and respect the 100-event business limit.
 - Keep case and event UUIDs stable and distinct from the stone UUID. Reference the agreed seeded shelter UUIDs; fixture files do not create shelters implicitly.
 - Author coherent fictional-world facts. Admission dates and event times must agree with the described scenario, and any state beyond AVAILABLE must be supported by the corresponding lifecycle history.
 - The initial examples are Sir Pebble without a profile and Madame Obsidian with a profile. Both include a case and an ADMITTED event.

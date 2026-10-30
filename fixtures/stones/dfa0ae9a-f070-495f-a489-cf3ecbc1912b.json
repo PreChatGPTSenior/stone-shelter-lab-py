@@ -1,0 +1,37 @@
+{
+  "stone": {
+    "externalId": "dfa0ae9a-f070-495f-a489-cf3ecbc1912b",
+    "name": "Captain Basalt",
+    "stoneType": "BASALT",
+    "stoneSize": "MEDIUM",
+    "biography": "Captain Basalt is a beloved resident of the fictional pet stone world."
+  },
+  "shelterCase": {
+    "externalId": "c1726a1e-c5ad-45e8-b149-6866ef3306fe",
+    "caseNumber": "0003-2026-P1",
+    "currentShelterId": "b222288c-1da8-4932-a7eb-75a55be41b87",
+    "admissionDate": "2026-10-01T09:00:00Z",
+    "events": [
+      {
+        "externalId": "b744bbcd-9b21-4ca7-bfc5-3d397ec69aaf",
+        "eventType": "ADMITTED",
+        "occurredAt": "2026-10-01T09:00:00Z",
+        "eventNotes": "Admitted to shelter P1 and made available for adoption."
+      },
+      {
+        "externalId": "6591ba90-92ac-452c-b4da-73968b58f45d",
+        "eventType": "ADOPTER_MEETING",
+        "occurredAt": "2026-10-02T09:00:00Z",
+        "eventNotes": "Met a family who enjoy quiet board games."
+      },
+      {
+        "externalId": "2a717282-7135-4173-8f4c-38882dafe6e2",
+        "eventType": "RESERVED",
+        "occurredAt": "2026-10-03T09:00:00Z",
+        "eventNotes": "Reserved while the family prepares a safe stone bed."
+      }
+    ],
+    "adoptionStatus": "RESERVED"
+  },
+  "profile": {}
+}

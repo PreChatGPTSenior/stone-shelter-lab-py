@@ -12,6 +12,7 @@ class AdoptionStatus(StrEnum):
     ADOPTED = "ADOPTED"
     RETURNED = "RETURNED"
 
+
 @dataclass
 class ShelterCase:
     name: str

@@ -1,9 +1,9 @@
-"""Internal catalog dependency contracts. Later describe the repository operations required by catalog application logic without depending on SQLAlchemy."""
+"""Repository operations used by catalog application scenarios."""
 
 from typing import Protocol
 
-from stone_shelter.catalog.domain.stone import Stone
+from stone_shelter.catalog.persistence.models import StoneModel
 
 
 class StoneRepository(Protocol):
-    async def add(self, stone: Stone) -> None: ...
+    def add(self, stone: StoneModel) -> None: ...

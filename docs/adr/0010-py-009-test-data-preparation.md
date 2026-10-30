@@ -7,7 +7,7 @@
 - Related: [PY-008](https://github.com/PreChatGPTSenior/stone-shelter-lab-py/issues/8), [domain model](../domain/model.md), [ADR-0008](0008-external-batch-ingestion-and-partial-updates.md), and [ADR-0009](0009-fictional-pet-stone-profiles.md)
 - Refines: The domain model's ingestion design. Creation includes mandatory initial admission history; subsequent life events use a separate dataset and API operation rather than embedding accumulated history in each creation batch.
 
-Update 2026-10-30: [ADR-0013](0013-single-stone-ingestion.md) supersedes the multi-stone batch contract and batch-wide transaction below. The current API registers one stone with its required case, optional profile, and 1 to 100 events containing ADMITTED in any position. Accumulated history may accompany creation. Earlier batch discussion is retained as decision history, not current implementation scope.
+Update 2026-10-30: [ADR-0013](0013-single-stone-ingestion.md) supersedes the multi-stone batch contract and batch-wide transaction below. The current API registers one stone with its required case, optional profile, and 1 to 100 events containing ADMITTED in any position. Accumulated history may accompany creation. Earlier batch discussion is retained as decision history, not current implementation scope. [ADR-0015](0015-source-owned-adoption-status.md) further supersedes any registration-time status reconstruction below: the source supplies the required current adoptionStatus; imported history is not replayed to determine it.
 
 ## Context
 
