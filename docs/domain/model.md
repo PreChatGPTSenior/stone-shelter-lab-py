@@ -4,6 +4,8 @@
 - Tracking: [PY-008](https://github.com/PreChatGPTSenior/stone-shelter-lab-py/issues/8)
 - Branch: `PY-008-domain-ingestion-contracts`
 - Basis: [lifetime cases](../adr/0007-lifetime-shelter-case-identity.md), [external ingestion](../adr/0008-external-batch-ingestion-and-partial-updates.md), and [fictional profiles](../adr/0009-fictional-pet-stone-profiles.md)
+- Current implementation direction: [PY-009 happy-path loading](../adr/0010-py-009-test-data-preparation.md) and [DTO-to-ORM mapping](../adr/0011-dto-to-orm-without-domain-dataclasses.md)
+- Current ingestion boundary: [one stone per request](../adr/0013-single-stone-ingestion.md); multi-stone API batches are not supported.
 
 ## Purpose and boundaries
 
@@ -26,6 +28,8 @@ classDiagram
         StoneType stone_type
         StoneSize stone_size
         string biography
+        datetime created_at
+        datetime updated_at
     }
 
     class StoneProfile {
@@ -36,12 +40,16 @@ classDiagram
         string health_notes
         string trigger_notes
         string preferred_environment
+        datetime created_at
+        datetime updated_at
     }
 
     class Shelter {
         UUID id
         string name
         string address
+        datetime created_at
+        datetime updated_at
     }
 
     class ShelterCase {
@@ -52,6 +60,8 @@ classDiagram
         UUID current_shelter_id
         AdoptionStatus adoption_status
         datetime admission_date
+        datetime created_at
+        datetime updated_at
     }
 
     class CaseEvent {
@@ -60,13 +70,8 @@ classDiagram
         UUID case_id
         CaseEventType event_type
         datetime occurred_at
-        datetime recorded_at
-        string description
-        UUID shelter_id
-        AdoptionStatus from_status
-        AdoptionStatus to_status
-        UUID from_shelter_id
-        UUID to_shelter_id
+        datetime created_at
+        string event_notes
     }
 
     class AdoptionStatus {
@@ -97,7 +102,8 @@ classDiagram
     class CaseEventType {
         <<enumeration>>
         ADMITTED
-        TRANSFERRED
+        TRANSFERRED_P1_TO_P2
+        TRANSFERRED_P2_TO_P1
         RESERVED
         RESERVATION_ENDED
         ADOPTED
@@ -112,14 +118,10 @@ classDiagram
     Stone "1" -- "0..1" ShelterCase : lifetime case
     Shelter "1" -- "0..*" ShelterCase : current assigned shelter
     ShelterCase "1" *-- "0..*" CaseEvent : events
-    Shelter "0..1" <-- "0..*" CaseEvent : event location
-    Shelter "0..1" <-- "0..*" CaseEvent : transfer origin
-    Shelter "0..1" <-- "0..*" CaseEvent : transfer destination
     StoneProfile ..> SocializationTrait : assigned traits
     StoneProfile ..> CareLevel : required care
     ShelterCase ..> AdoptionStatus : current status
     CaseEvent ..> CaseEventType : event type
-    CaseEvent ..> AdoptionStatus : optional status transition
 ```
 
 Nullable fields are identified in the field dictionaries below. Enum attributes in the diagram do not imply PostgreSQL native enums or a particular collection storage strategy.
@@ -129,12 +131,25 @@ Nullable fields are identified in the field dictionaries below. Enum attributes 
 - A Stone has at most one StoneProfile. Every profile belongs to exactly one stone. A profile is optional at creation and can be supplied later through a partial update.
 - A Stone has at most one lifetime ShelterCase. Every case belongs to exactly one stone. Existing catalog-only records can have no case; whether new ingestion requires a case remains contract work.
 - Every case references exactly one current shelter. One shelter can have many cases.
-- Every CaseEvent belongs to exactly one case. A case has a collection of events, without a separate history container or field-change records.
-- An event can reference a shelter as its historical location. A transfer can additionally reference its origin and destination shelters.
+- Every CaseEvent belongs to exactly one case. A case has a collection of events, without a separate history container or field-change records. New ingestion requires 1 to 100 events containing ADMITTED in any position.
+- CaseEvent has no direct shelter relationships. Its CaseEventType identifies the direction of a transfer between the two known shelters.
 - Profile information belongs to the stone and remains with it across returns, transfers, and status changes.
 - Composition expresses event ownership, not permission to delete records. Physical deletion is outside the integration scope.
 
 ## Entities and fields
+
+### Shared technical timestamps
+
+| Field | Applies to | Meaning |
+| --- | --- | --- |
+| `created_at` | Stone, StoneProfile, Shelter, ShelterCase, CaseEvent | When the row was created in the hub database. Provided by CreatedAtMixin. |
+| `updated_at` | Stone, StoneProfile, Shelter, ShelterCase | When that row was last updated. Provided by UpdatedAtMixin; initialized on insertion. |
+
+Both fields are non-null timezone-aware timestamps. PostgreSQL supplies their initial values through `DEFAULT now()`. SQLAlchemy includes `updated_at = now()` in updates when no explicit value is supplied. This is not a database UPDATE trigger: independent SQL writers must set the update timestamp themselves or use a separately designed database mechanism.
+
+PostgreSQL `now()` is the transaction-start timestamp; multiple operations within a transaction can have the same technical timestamp. These fields are not concurrency versions or upstream ordering tokens. Updating a profile or adding an event does not automatically update its stone or case timestamp.
+
+CaseEvent uses `created_at` instead of the earlier `recorded_at` name. It has no `updated_at` because the current flow appends events without editing them. `occurred_at` remains the source-provided time of the actual event, distinct from registration in the hub. These shared timestamps are not repeated in every entity field table below.
 
 ### Stone
 
@@ -167,7 +182,7 @@ The profile has no separate external identifier: it is identified by its stone i
 
 | Field | Type | Required | Meaning and constraints |
 | --- | --- | --- | --- |
-| `id` | UUID | Yes | Primary key referenced by cases and events. |
+| `id` | UUID | Yes | Primary key referenced by cases. |
 | `name` | String | Yes | Shelter name. |
 | `address` | String | Yes | Shelter address. |
 
@@ -185,9 +200,11 @@ Begin with two persisted shelter records. How the source identifies these record
 | `adoption_status` | AdoptionStatus | Yes | Current adoption state. |
 | `admission_date` | Timezone-aware datetime | Yes | First admission recorded for this lifetime case, supplied by the source. |
 
-A return or transfer preserves the case UUID and number. A transfer changes the current shelter; it does not rewrite the number, first admission date, or historical event locations. The number is an opaque source-provided string: preserve leading zeros and do not derive the current shelter from its suffix.
+A return or transfer preserves the case UUID and number. A transfer changes the current shelter; it does not rewrite the number, first admission date, or previous transfer directions. The number is an opaque source-provided string: preserve leading zeros and do not derive the current shelter from its suffix.
 
 The current shelter represents case responsibility and remains assigned even while the pet is adopted. Repeated arrivals and transfers are recorded in case events. Case identity and number conflicts must not silently merge different cases.
+
+`current_shelter_id` is the persisted foreign-key column. An ORM attribute named `current_shelter` is navigation to the related Shelter object, not another database column or a second shelter assignment. Both can exist in the ORM model while representing the same association.
 
 ### CaseEvent
 
@@ -198,15 +215,23 @@ The current shelter represents case responsibility and remains assigned even whi
 | `case_id` | UUID, FK to ShelterCase | Yes | Owning lifetime case. |
 | `event_type` | CaseEventType | Yes | Kind of event. |
 | `occurred_at` | Timezone-aware datetime | Yes | When the event occurred according to the source. |
-| `recorded_at` | Timezone-aware datetime | Yes | When this hub registered the event. |
-| `description` | Text | Yes | Meaningful account of the event and staff observations. |
-| `shelter_id` | UUID, FK to Shelter | No | Historical event location, when applicable. |
-| `from_status` | AdoptionStatus | No | Previous status for an event that changes adoption status. |
-| `to_status` | AdoptionStatus | No | Resulting status for an event that changes adoption status. |
-| `from_shelter_id` | UUID, FK to Shelter | No | Origin shelter for a transfer. |
-| `to_shelter_id` | UUID, FK to Shelter | No | Destination shelter for a transfer. |
+| `created_at` | Timezone-aware datetime | Yes | When this hub registered the event; inherited from CreatedAtMixin. |
+| `event_notes` | Text | Yes | Meaningful account of the event and staff observations. |
 
-Transition fields apply only to appropriate event types. Their conditional requirements will be specified in the ingestion contract. Historical shelter references do not change when the case moves elsewhere.
+The earlier `description` field is named `event_notes`. Separate `from_status`, `to_status`, `shelter_id`, `from_shelter_id`, and `to_shelter_id` fields are not part of this revised event model. Event type determines the applicable status operation or transfer direction without separate shelter foreign keys or an additional direction field on the event.
+
+### Transfer direction for the two-shelter scenario
+
+| CaseEventType | Origin | Destination |
+| --- | --- | --- |
+| `TRANSFERRED_P1_TO_P2` | Shelter P1 | Shelter P2 |
+| `TRANSFERRED_P2_TO_P1` | Shelter P2 | Shelter P1 |
+
+P1 and P2 are stable labels for the two seeded shelter records. Their mapping to shelter UUIDs will be specified with the fixture reference data; do not derive the mapping from case-number suffixes or current shelter state.
+
+For a transfer event, the application resolves the destination from `event_type`, updates `ShelterCase.current_shelter_id`, and appends the event in one transaction. The transfer does not itself change adoption status. The event type remains stored in history after later moves, so its direction is not inferred from the case's current location.
+
+This explicit two-route vocabulary is intentional for the current educational scenario. Adding more shelters would require revisiting it. No new generic routing subsystem or extra lifecycle validation is required for the agreed consistent-input happy path.
 
 ## Socialization traits
 
@@ -254,14 +279,15 @@ stateDiagram-v2
 
 `RETURNED` is a distinct current status, not an immediate transition to `AVAILABLE`. A returned pet might need quarantine, recovery, or assessment before becoming available. No separate quarantine status is introduced here. Readiness is a separate decision supplied by the source.
 
-The return is also a historical event, so it remains discoverable after later status changes. `UNDER_REVIEW` is replaced by the agreed vocabulary above. Initial import can describe an existing case in any recognized current state without fabricating its earlier history.
+The return is also a historical event, so it remains discoverable after later status changes. `UNDER_REVIEW` is replaced by the agreed vocabulary above. Case processing begins from AVAILABLE and uses coherent history to establish the intended state. History may accompany registration or arrive later through the event operation. An ADMITTED event records the initial state without resetting an existing case.
 
 ## Case event types
 
 | Value | Meaning | Useful description content |
 | --- | --- | --- |
 | `ADMITTED` | First admission. | Arrival context and initial observations. |
-| `TRANSFERRED` | Transfer between shelters. | Transfer reason and adaptation context. |
+| `TRANSFERRED_P1_TO_P2` | Transfer from shelter P1 to shelter P2. | Transfer reason and adaptation context. |
+| `TRANSFERRED_P2_TO_P1` | Transfer from shelter P2 to shelter P1. | Transfer reason and adaptation context. |
 | `RESERVED` | Reservation created. | Reservation context. |
 | `RESERVATION_ENDED` | Reservation ended without adoption. | Cancellation or expiration, with a reason if supplied. |
 | `ADOPTED` | Adoption completed. | Relevant home conditions and handover observations. |
@@ -275,37 +301,39 @@ Events describe the pet's life, not an audit log of field assignments. There are
 
 ## Incremental ingestion and case history
 
-The integration simulates an existing operational system: stones are registered first, profiles may arrive with them or later, and new events continue to arrive throughout each pet's life. A case can initially have no recorded events. History grows as events are received; callers do not have to resend the entire history.
+The integration simulates an existing operational system: one stone is registered per request with its case and 1 to 100 life events. The collection must include ADMITTED in any position and may contain accumulated history. Profiles may arrive with the stone or later. Subsequent events continue to arrive throughout each pet's life without callers resending the initial admission or the entire history.
 
 | Operation | Accepted information |
 | --- | --- |
-| Batch creation | Stone and case data, with an optional profile and optional known history. |
+| Single-stone registration | Required `stone` and `shelterCase`, with an optional `profile`; `shelterCase.events` contains 1 to 100 events, including ADMITTED in any position. No `items` wrapper. |
 | Partial update | Changed stone, profile, or case data. A previously absent profile can be added here. |
-| Append case events | One or more new events for an existing case, independently of profile updates. |
+| Append case events | Future operation for adding events to one existing case; its DTO and acceptance rules will be designed separately. |
+
+For registration, DTO validators use `PydanticCustomError` for two input-dependent acceptance rules: more than 100 events produces `CASE_EVENT_LIMIT_EXCEEDED` with `limit` and `actual` context; a nonempty list without ADMITTED produces `CASE_ADMITTED_EVENT_REQUIRED` with `required_event_type` context. The list still uses a structural minimum length of one, without a generic maximum-length constraint. A custom FastAPI validation-error handler and the final HTTP error envelope are not implemented yet. See [ADR-0013](../adr/0013-single-stone-ingestion.md).
 
 ### Dedicated event endpoint
 
 `POST /api/v1/shelter-cases/{external_case_id}/events`
 
 - The path identifies an existing lifetime case by its source-provided UUID, not its internal primary key or human-readable case number.
-- The request supplies an array of new events, allowing a single meeting or several accumulated events to be delivered together. The exact JSON envelope and response remain contract work.
+- This is a planned operation, not an implemented input DTO. Its request limits and response remain contract work.
 - The operation appends events rather than replacing the case history.
-- Identical redelivery with the same event `external_id` must not create another event. Conflicting content and corrections require separate contract rules.
-- Known history can optionally accompany initial batch creation. Both entry points must reuse the same event-processing rules.
+- Emulator input files may contain multiple registration records, but the emulator sends one stone per request. Each creation payload includes ADMITTED inside `shelterCase.events` and may contain accumulated history. The separate event file supplies later events to individual cases; do not resend already-created events.
+- The educational happy path assumes unique, consistent, chronologically ordered events. Duplicate delivery, conflicting content, corrections, and late-event handling are deferred.
 - An `OBSERVATION` or `ADOPTER_MEETING` can add history without changing the current status.
-- A current `RETURNED` transition also changes the case status to `RETURNED`; a current `TRANSFERRED` event also changes its assigned shelter. Persist an applicable state transition and its event in the same transaction.
-- Late historical events must not roll current state back to an earlier status or shelter. Ordering and conflict rules must be defined before implementation.
+- A `RETURNED` event changes the case status to `RETURNED`; a directional transfer event changes its assigned shelter according to `event_type`. Persist the applicable state change and event in the same transaction.
+- Test scenarios with final states other than AVAILABLE include the complete event sequence explaining those states. Each registration atomically persists one stone, its case, optional profile, and supplied events. There is no shared transaction across independent registrations or across creation and a later event request.
 
 ### Event facts and future retrieval
 
 - The source supplies events and their factual content. A changed health note does not imply an examination; a changed status does not establish an unknown return reason.
 - If one incoming operation includes a state change and its event, persist them in the same transaction.
 - Standalone observations and meetings use the dedicated event endpoint without requiring a profile update.
-- Repeated delivery of the same external event must not append another copy. Correction, conflicting duplicate, and late-arrival behavior still need explicit contract rules.
-- Historical events do not automatically overwrite current state. Source ordering rules for state updates will be specified separately from event occurrence time.
+- Duplicate, correction, and out-of-order behavior are future hardening concerns, not prerequisites for the current learning increment.
+- Event processing starts from AVAILABLE and applies the coherent supplied history; DTO validation does not enforce array order. Event-processing logic is not implemented by the DTO change.
 - Observations do not automatically rewrite the current StoneProfile. A reaction during one meeting is evidence; a stable trait or trigger is a separate staff assessment.
-- Exact retrieval can use event type, dates, status transitions, and shelter references. Semantic retrieval can use descriptions alongside the current profile and reference documents.
-- Retrieved descriptions must retain their CaseEvent identifiers so recommendations can cite specific evidence and its date. No embedding storage fields are added to these domain entities at this stage.
+- Exact retrieval can use event type, dates, current case state, and transfer direction. Semantic retrieval can use `event_notes` alongside the current profile and reference documents.
+- Retrieved notes must retain their CaseEvent identifiers so recommendations can cite specific evidence and its date. No embedding storage fields are added to these domain entities at this stage.
 
 ### Learning scenario: new history changes retrieval
 
@@ -319,12 +347,12 @@ New evidence can improve retrieval or change a recommendation even when the curr
 
 ## Remaining contract decisions
 
-- Batch creation and partial-update payloads, JSON aliases, and reference identifiers.
-- Whether every newly ingested stone must have a case. Profile optionality is settled: it may arrive at creation or later.
+- Single-stone registration responses, partial-update payloads, and fixture reference identifiers.
+- New ingestion requires a case and 1 to 100 events containing ADMITTED in any position. Profile optionality is settled: it may arrive at creation or later.
 - Field lengths, blank-text normalization, and clearing versus omitting fields in updates. An omitted collection in a partial update must not accidentally become an empty replacement.
 - Storage representation for the socialization set and enum fields.
 - Source timestamps or versions for current-state updates, stale deliveries, equal-time conflicts, and unchanged payloads.
-- Conditional transition fields, event corrections, duplicate conflicts, and out-of-order event delivery.
-- Creation and partial-update endpoint details, the event request envelope, batch atomicity, and error responses. The dedicated append-events endpoint is agreed above.
+- Exact JSON representation of transfer direction and the fixture mapping of P1/P2 to shelter UUIDs. Event corrections, duplicate conflicts, and out-of-order delivery are deferred.
+- Creation and partial-update endpoint details and error responses. Single-registration atomicity is agreed; there is no multi-stone API batch. The dedicated append-events endpoint is agreed above.
 
 These decisions do not change the agreed domain boundaries above. Application code, migrations, embeddings, and search implementation are outside this documentation change.

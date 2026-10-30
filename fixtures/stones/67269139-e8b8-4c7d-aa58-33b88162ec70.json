@@ -1,0 +1,34 @@
+{
+  "stone": {
+    "externalId": "67269139-e8b8-4c7d-aa58-33b88162ec70",
+    "name": "Madame Obsidian",
+    "stoneType": "OBSIDIAN",
+    "stoneSize": "MEDIUM",
+    "biography": "An affectionate stone who prefers a peaceful home."
+  },
+  "shelterCase": {
+    "externalId": "65bd7147-e394-44d5-bf97-24e15b1b428e",
+    "caseNumber": "0002-2026-P2",
+    "currentShelterId": "10ad5165-1b0c-4255-bfb8-ef6979d10e2b",
+    "admissionDate": "2026-10-30T09:30:00Z",
+    "events": [
+      {
+        "externalId": "e9a24912-045d-4435-af5b-ccdb26405fe3",
+        "eventType": "ADMITTED",
+        "occurredAt": "2026-10-30T09:30:00Z",
+        "eventNotes": "Accepted into shelter P2 and made available for adoption. Staff noted a preference for calm surroundings."
+      }
+    ]
+  },
+  "profile": {
+    "socializationTraits": [
+      "ENJOYS_HUMAN_COMPANY",
+      "CAUTIOUS_WITH_STRANGERS",
+      "NEEDS_SLOW_INTRODUCTION"
+    ],
+    "careLevel": "ADDITIONAL",
+    "healthNotes": "An old crack requires occasional polishing.",
+    "triggerNotes": "Becomes anxious around vacuum cleaners.",
+    "preferredEnvironment": "A quiet home with a predictable routine."
+  }
+}

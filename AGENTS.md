@@ -30,6 +30,16 @@
 - Prefer meaningful scenario and integration coverage over tests for every field, framework setting, or intermediate implementation step.
 - Run database integration tests through Testcontainers. Do not point them at the local development database.
 
+## Temporary database-only development policy
+
+- Until the owner explicitly changes this policy, use only clean, disposable databases provisioned through Testcontainers for database-backed development, schema generation, migration verification, and tests.
+- Do not run these operations against an existing local development database or assume that a database selected by `.env` is an authorized target. Supply the container connection settings explicitly.
+- Treat the project as a local, single-developer learning application with no deployed installations or external consumers requiring compatibility.
+- Prefer recreating the disposable database and reloading prepared data. Do not introduce legacy-data transfer, backfills, transitional schemas, production rollout procedures, or backward-compatibility flows.
+- Use Alembic to build and verify the current schema from an empty database. Do not add data-preserving upgrade scenarios merely because older migrations or Git commits exist.
+- This policy does not authorize deleting persistent databases or volumes. It applies to disposable Testcontainers resources and does not authorize unrelated code or migration edits.
+- See [ADR-0012](docs/adr/0012-clean-testcontainers-only-development.md). Existing tooling may still need adjustment; documentation of this policy does not mean that adjustment is implemented.
+
 ## Domain premise
 
 - This is a fictional world where stones are pets. Their personalities, traumatic experiences, health needs, and preferences are legitimate domain data.

@@ -2,25 +2,10 @@
 
 from uuid import UUID
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import Field
 
-from stone_shelter.catalog.domain.stone import StoneSize, StoneType
-
-
-class ApiRequest(BaseModel):
-    model_config = ConfigDict(
-        str_strip_whitespace=True,
-        extra="ignore",
-        validate_by_name=True,
-        validate_by_alias=True,
-    )
-
-
-class ApiResponse(BaseModel):
-    model_config = ConfigDict(
-        from_attributes=True,
-        serialize_by_alias=True,
-    )
+from stone_shelter.api.contracts import ApiRequest, ApiResponse
+from stone_shelter.catalog.enums import CareLevel, SocializationTrait, StoneSize, StoneType
 
 
 class StoneCreateRequest(ApiRequest):
@@ -28,7 +13,15 @@ class StoneCreateRequest(ApiRequest):
     stone_type: StoneType = Field(alias="stoneType")
     stone_size: StoneSize = Field(alias="stoneSize")
     biography: str | None = Field(default=None, max_length=2048)
+    external_id: UUID = Field(alias="externalId")
 
 
-class StoneCreateResponse(ApiResponse):
-    id: UUID
+class StoneProfileCreateRequest(ApiRequest):
+    socialization_traits: set[SocializationTrait] = Field(
+        default_factory=set,
+        alias="socializationTraits",
+    )
+    care_level: CareLevel | None = Field(default=None, alias="careLevel")
+    health_notes: str | None = Field(default=None, alias="healthNotes")
+    trigger_notes: str | None = Field(default=None, alias="triggerNotes")
+    preferred_environment: str | None = Field(default=None, alias="preferredEnvironment")
