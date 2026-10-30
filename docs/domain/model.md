@@ -5,6 +5,7 @@
 - Branch: `PY-008-domain-ingestion-contracts`
 - Basis: [lifetime cases](../adr/0007-lifetime-shelter-case-identity.md), [external ingestion](../adr/0008-external-batch-ingestion-and-partial-updates.md), and [fictional profiles](../adr/0009-fictional-pet-stone-profiles.md)
 - Current implementation direction: [PY-009 happy-path loading](../adr/0010-py-009-test-data-preparation.md) and [DTO-to-ORM mapping](../adr/0011-dto-to-orm-without-domain-dataclasses.md)
+- Current ingestion boundary: [one stone per request](../adr/0013-single-stone-ingestion.md); multi-stone API batches are not supported.
 
 ## Purpose and boundaries
 
@@ -130,7 +131,7 @@ Nullable fields are identified in the field dictionaries below. Enum attributes 
 - A Stone has at most one StoneProfile. Every profile belongs to exactly one stone. A profile is optional at creation and can be supplied later through a partial update.
 - A Stone has at most one lifetime ShelterCase. Every case belongs to exactly one stone. Existing catalog-only records can have no case; whether new ingestion requires a case remains contract work.
 - Every case references exactly one current shelter. One shelter can have many cases.
-- Every CaseEvent belongs to exactly one case. A case has a collection of events, without a separate history container or field-change records.
+- Every CaseEvent belongs to exactly one case. A case has a collection of events, without a separate history container or field-change records. New ingestion requires 1 to 100 events containing ADMITTED in any position.
 - CaseEvent has no direct shelter relationships. Its CaseEventType identifies the direction of a transfer between the two known shelters.
 - Profile information belongs to the stone and remains with it across returns, transfers, and status changes.
 - Composition expresses event ownership, not permission to delete records. Physical deletion is outside the integration scope.
@@ -278,7 +279,7 @@ stateDiagram-v2
 
 `RETURNED` is a distinct current status, not an immediate transition to `AVAILABLE`. A returned pet might need quarantine, recovery, or assessment before becoming available. No separate quarantine status is introduced here. Readiness is a separate decision supplied by the source.
 
-The return is also a historical event, so it remains discoverable after later status changes. `UNDER_REVIEW` is replaced by the agreed vocabulary above. In the selected PY-009 loading flow, cases are created as AVAILABLE and subsequent chronological events bring them to their intended final states. An ADMITTED event records the initial state without resetting a case.
+The return is also a historical event, so it remains discoverable after later status changes. `UNDER_REVIEW` is replaced by the agreed vocabulary above. Case processing begins from AVAILABLE and uses coherent history to establish the intended state. History may accompany registration or arrive later through the event operation. An ADMITTED event records the initial state without resetting an existing case.
 
 ## Case event types
 
@@ -300,26 +301,28 @@ Events describe the pet's life, not an audit log of field assignments. There are
 
 ## Incremental ingestion and case history
 
-The integration simulates an existing operational system: stones are registered first, profiles may arrive with them or later, and new events continue to arrive throughout each pet's life. A case can initially have no recorded events. History grows as events are received; callers do not have to resend the entire history.
+The integration simulates an existing operational system: one stone is registered per request with its case and 1 to 100 life events. The collection must include ADMITTED in any position and may contain accumulated history. Profiles may arrive with the stone or later. Subsequent events continue to arrive throughout each pet's life without callers resending the initial admission or the entire history.
 
 | Operation | Accepted information |
 | --- | --- |
-| Batch creation | Stone and case data, with an optional profile; cases start as AVAILABLE. Events are not embedded. |
+| Single-stone registration | Required `stone` and `shelterCase`, with an optional `profile`; `shelterCase.events` contains 1 to 100 events, including ADMITTED in any position. No `items` wrapper. |
 | Partial update | Changed stone, profile, or case data. A previously absent profile can be added here. |
-| Append case events | One or more new events for an existing case, independently of profile updates. |
+| Append case events | Future operation for adding events to one existing case; its DTO and acceptance rules will be designed separately. |
+
+For registration, DTO validators use `PydanticCustomError` for two input-dependent acceptance rules: more than 100 events produces `CASE_EVENT_LIMIT_EXCEEDED` with `limit` and `actual` context; a nonempty list without ADMITTED produces `CASE_ADMITTED_EVENT_REQUIRED` with `required_event_type` context. The list still uses a structural minimum length of one, without a generic maximum-length constraint. A custom FastAPI validation-error handler and the final HTTP error envelope are not implemented yet. See [ADR-0013](../adr/0013-single-stone-ingestion.md).
 
 ### Dedicated event endpoint
 
 `POST /api/v1/shelter-cases/{external_case_id}/events`
 
 - The path identifies an existing lifetime case by its source-provided UUID, not its internal primary key or human-readable case number.
-- The request supplies an array of new events, allowing a single meeting or several accumulated events to be delivered together. The exact JSON envelope and response remain contract work.
+- This is a planned operation, not an implemented input DTO. Its request limits and response remain contract work.
 - The operation appends events rather than replacing the case history.
-- `stones.json` and `case-events.json` are separate emulator inputs, delivered through separate API operations. Load creation data first and events afterward.
+- Emulator input files may contain multiple registration records, but the emulator sends one stone per request. Each creation payload includes ADMITTED inside `shelterCase.events` and may contain accumulated history. The separate event file supplies later events to individual cases; do not resend already-created events.
 - The educational happy path assumes unique, consistent, chronologically ordered events. Duplicate delivery, conflicting content, corrections, and late-event handling are deferred.
 - An `OBSERVATION` or `ADOPTER_MEETING` can add history without changing the current status.
 - A `RETURNED` event changes the case status to `RETURNED`; a directional transfer event changes its assigned shelter according to `event_type`. Persist the applicable state change and event in the same transaction.
-- Test scenarios with final states other than AVAILABLE include the complete event sequence explaining those states. There is no shared transaction spanning the creation request and the later event request.
+- Test scenarios with final states other than AVAILABLE include the complete event sequence explaining those states. Each registration atomically persists one stone, its case, optional profile, and supplied events. There is no shared transaction across independent registrations or across creation and a later event request.
 
 ### Event facts and future retrieval
 
@@ -327,7 +330,7 @@ The integration simulates an existing operational system: stones are registered 
 - If one incoming operation includes a state change and its event, persist them in the same transaction.
 - Standalone observations and meetings use the dedicated event endpoint without requiring a profile update.
 - Duplicate, correction, and out-of-order behavior are future hardening concerns, not prerequisites for the current learning increment.
-- The selected flow applies chronological events to cases created as AVAILABLE; snapshot import and historical replay are not combined in this increment.
+- Event processing starts from AVAILABLE and applies the coherent supplied history; DTO validation does not enforce array order. Event-processing logic is not implemented by the DTO change.
 - Observations do not automatically rewrite the current StoneProfile. A reaction during one meeting is evidence; a stable trait or trigger is a separate staff assessment.
 - Exact retrieval can use event type, dates, current case state, and transfer direction. Semantic retrieval can use `event_notes` alongside the current profile and reference documents.
 - Retrieved notes must retain their CaseEvent identifiers so recommendations can cite specific evidence and its date. No embedding storage fields are added to these domain entities at this stage.
@@ -344,12 +347,12 @@ New evidence can improve retrieval or change a recommendation even when the curr
 
 ## Remaining contract decisions
 
-- Batch creation and partial-update payloads, JSON aliases, and reference identifiers.
-- Whether every newly ingested stone must have a case. Profile optionality is settled: it may arrive at creation or later.
+- Single-stone registration responses, partial-update payloads, and fixture reference identifiers.
+- New ingestion requires a case and 1 to 100 events containing ADMITTED in any position. Profile optionality is settled: it may arrive at creation or later.
 - Field lengths, blank-text normalization, and clearing versus omitting fields in updates. An omitted collection in a partial update must not accidentally become an empty replacement.
 - Storage representation for the socialization set and enum fields.
 - Source timestamps or versions for current-state updates, stale deliveries, equal-time conflicts, and unchanged payloads.
 - Exact JSON representation of transfer direction and the fixture mapping of P1/P2 to shelter UUIDs. Event corrections, duplicate conflicts, and out-of-order delivery are deferred.
-- Creation and partial-update endpoint details, the event request envelope, batch atomicity, and error responses. The dedicated append-events endpoint is agreed above.
+- Creation and partial-update endpoint details and error responses. Single-registration atomicity is agreed; there is no multi-stone API batch. The dedicated append-events endpoint is agreed above.
 
 These decisions do not change the agreed domain boundaries above. Application code, migrations, embeddings, and search implementation are outside this documentation change.

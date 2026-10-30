@@ -5,7 +5,9 @@
 - Tracking: [PY-009](https://github.com/PreChatGPTSenior/stone-shelter-lab-py/issues/10)
 - Branch: `PY-009-test-data-preparation`
 - Related: [PY-008](https://github.com/PreChatGPTSenior/stone-shelter-lab-py/issues/8), [domain model](../domain/model.md), [ADR-0008](0008-external-batch-ingestion-and-partial-updates.md), and [ADR-0009](0009-fictional-pet-stone-profiles.md)
-- Refines: The domain model's ingestion design. The earlier option to embed known history in a creation batch is superseded by separate datasets and API operations.
+- Refines: The domain model's ingestion design. Creation includes mandatory initial admission history; subsequent life events use a separate dataset and API operation rather than embedding accumulated history in each creation batch.
+
+Update 2026-10-30: [ADR-0013](0013-single-stone-ingestion.md) supersedes the multi-stone batch contract and batch-wide transaction below. The current API registers one stone with its required case, optional profile, and 1 to 100 events containing ADMITTED in any position. Accumulated history may accompany creation. Earlier batch discussion is retained as decision history, not current implementation scope.
 
 ## Context
 
@@ -46,10 +48,13 @@ Verify the increment with a meaningful end-to-end backend happy-path scenario: l
 
 | Dataset | Contents | API direction |
 | --- | --- | --- |
-| `stones.json` | A creation batch containing stone data, each stone's lifetime case, and an optional profile | Proposed `POST /api/v1/stones/batch`; exact contract pending |
-| `case-events.json` | Life events associated with cases by their external UUIDs | A separate event-ingestion operation; multi-case batching details pending |
+| `stones.json` | A creation batch containing stone data, each stone's lifetime case with initial admission events, and an optional profile | Proposed `POST /api/v1/stones/batch`; exact contract pending |
+| `case-events.json` | Subsequent life events associated with existing cases by their external UUIDs | A separate event-ingestion operation; multi-case batching details pending |
 
-- Do not include an `events` collection in the stone-creation batch.
+- Each `shelterCase` includes a required, non-null, nonempty `events` list. At least one event must have `eventType: "ADMITTED"`, recording acceptance into the shelter and the initial AVAILABLE state. Its position in the submitted list is not constrained. A new case must not be created without this accompanying event.
+- This initial-event requirement supersedes the earlier blanket exclusion of events from creation payloads. Keep later life history in the separate event operation; do not repeat the initial ADMITTED event in `case-events.json` after it has been created with the case.
+- Each StoneBatchItemRequest must contain both `stone: StoneCreateRequest` and `shelter_case: ShelterCaseCreateRequest` (JSON alias `shelterCase`). A stone must not be submitted without its accompanying lifetime case documentation. Both nested objects are required and non-null; only the profile is optional.
+- Persist the stone, its accompanying case, the initial events, and the optional profile together within the creation batch transaction. Do not create a case-less stone or an event-less new case through this operation. This settles the earlier open questions about case and initial-history optionality for newly ingested stones.
 - A profile may be supplied at creation or added later through partial update. History can continue growing independently of profile changes.
 - Files are simulator input. The simulator reads their JSON and calls application APIs; this is not a multipart upload interface or a direct-SQL seed script.
 - Use stable external stone, case, and event UUIDs and consistent shelter references across files. The case UUID differs from the stone UUID; its immutable human-readable number is also retained.
@@ -79,17 +84,17 @@ The ADMITTED event can establish an initial AVAILABLE state with no previous sta
 
 RETURNED is a distinct current adoption status and is unavailable for new adoption or reservation. It can represent time needed for quarantine, recovery, or assessment. Becoming AVAILABLE again requires a separate readiness transition; the return remains in history afterward. This follows the revised PY-008 domain model rather than the older UNDER_REVIEW vocabulary.
 
-The first representative datasets must include an AVAILABLE pet without a profile and a RETURNED pet with a profile and the complete transition history. An AVAILABLE pet may initially have no recorded events.
+The first representative datasets must include an AVAILABLE pet without a profile and a pet with a profile that reaches RETURNED through the complete transition history. Both cases include ADMITTED in their creation payloads; the second pet's subsequent adoption and return are loaded through the event API.
 
 ### Transition-driven loading
 
 The owner selected transition-driven loading:
 
-1. Load `stones.json`, creating stones, optional profiles, and cases initially in AVAILABLE.
-2. Load `case-events.json`, applying each case's events in chronological order to reach its intended final state.
+1. Load `stones.json`, creating stones, optional profiles, cases initially in AVAILABLE, and each case's mandatory initial ADMITTED event.
+2. Load `case-events.json`, applying each case's subsequent events in chronological order to reach its intended final state.
 3. Start retrieval scenarios after loading is complete and the resulting state agrees with the fixture history.
 
-The ADMITTED event records admission and the initial AVAILABLE state. It must not reset an existing case back to AVAILABLE. Subsequent transition events update the case; observations and meetings only add history.
+The creation DTO enforces a nonempty event list containing ADMITTED in any position; it does not enforce array order. The initial event records admission and the initial AVAILABLE state in the same creation transaction. It must not reset an existing case back to AVAILABLE. Subsequent transition events update the case; observations and meetings only add history. Broader chronology, duplicate, and transition validation remains deferred under the happy-path assumptions.
 
 The creation batch is one transaction. Each event request persists its events and applicable state changes in one transaction. The existing single-stone service must not commit independently for each item inside the batch scenario.
 
