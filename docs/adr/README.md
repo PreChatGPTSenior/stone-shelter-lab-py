@@ -13,6 +13,7 @@ ADRs record why an architectural choice was accepted, including consequences and
 | [ADR-0007](0007-lifetime-shelter-case-identity.md) | One lifetime ShelterCase per stone, stable global identity, and explicit adoption states/transitions | Accepted design; return requires review and direct adoption is allowed; persistence and ingestion are not implemented |
 | [ADR-0008](0008-external-batch-ingestion-and-partial-updates.md) | External batch creation, timestamp-aware single-stone partial updates, observed history, and no physical deletion | Accepted design; entities and payload details precede search; implementation is pending |
 | [ADR-0009](0009-fictional-pet-stone-profiles.md) | Fictional pet-stone profiles, staff-assigned social traits, care/health notes, triggers, wishes and separate compatibility knowledge | Accepted conceptual fields; vocabulary, storage and compatibility content are not implemented |
+| [ADR-0010 / PY-009](0010-py-009-test-data-preparation.md) | Separate stone and case-event datasets, optional profiles, and complete lifecycle evidence in test scenarios | Accepted direction; JSON contracts, loading semantics, fixtures and simulator remain pending |
 
 Tracking: [PY-002](https://github.com/PreChatGPTSenior/stone-shelter-lab-py/issues/2), [OpenSpec proposal](../../openspec/changes/py-002-db-support/proposal.md), [project board](https://github.com/users/PreChatGPTSenior/projects/1/views/1).
 

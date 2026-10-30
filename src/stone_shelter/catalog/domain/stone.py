@@ -1,9 +1,10 @@
 """Future stone domain model. Later describe specimen properties and their invariants. Adoption availability belongs to an adoption listing, not to the stone."""
 
 from dataclasses import dataclass, field
-from datetime import datetime
 from enum import StrEnum
 from uuid import UUID, uuid4
+
+from stone_shelter.catalog.domain.profile import StoneProfile
 
 
 class StoneType(StrEnum):
@@ -30,6 +31,7 @@ class Stone:
     name: str
     stone_type: StoneType
     stone_size: StoneSize
-    admission_date: datetime
+    external_id: UUID
+    profile: StoneProfile | None = None
     biography: str | None = None
     id: UUID = field(default_factory=uuid4)
