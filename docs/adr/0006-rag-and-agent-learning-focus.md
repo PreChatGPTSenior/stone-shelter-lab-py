@@ -6,6 +6,10 @@
 - Preserves: manual learning, explicit authorization for assistant code changes, modular boundaries, and transaction ownership
 - Requirements and learning backlog: [RAG learning requirements](../requirements/rag-learning.md)
 
+## Retrieval backend refinement
+
+[ADR-0016](0016-typesense-lexical-qdrant-vector-experiments.md) selects Typesense for lexical retrieval and Qdrant for vectors, with Python fusion and an incremental experiment plan. This is accepted direction only; no search or provider integration is installed by that documentation change.
+
 ## Context
 
 The owner has approximately fifteen years of Java and enterprise engineering experience. Database configuration, async sessions, transaction ownership, migrations, repository wiring, HTTP contracts, and scenario tests have now been explored in Python. Continuing through a complete CRUD interface or another object-storage photo upload would largely repeat familiar engineering tasks with different syntax.
