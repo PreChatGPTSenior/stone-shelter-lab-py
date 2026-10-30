@@ -18,6 +18,7 @@
         "occurredAt": "2026-10-30T09:00:00Z",
         "eventNotes": "Accepted into shelter P1 and made available for adoption."
       }
-    ]
+    ],
+    "adoptionStatus": "AVAILABLE"
   }
 }

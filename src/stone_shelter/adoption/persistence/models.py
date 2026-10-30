@@ -1,6 +1,7 @@
 """Map shelters, lifetime cases, and their life events to database tables."""
 
 from datetime import datetime
+from typing import TYPE_CHECKING
 from uuid import UUID
 
 from sqlalchemy import DateTime, ForeignKey, String, Text, Uuid
@@ -12,6 +13,9 @@ from stone_shelter.infrastructure.database.mixins import (
     UpdatedAtMixin,
     VersionedMixin,
 )
+
+if TYPE_CHECKING:
+    from stone_shelter.catalog.persistence.models import StoneModel
 
 
 class ShelterModel(CreatedAtMixin, UpdatedAtMixin, VersionedMixin, Base):
@@ -58,12 +62,16 @@ class ShelterCaseModel(CreatedAtMixin, UpdatedAtMixin, VersionedMixin, Base):
     adoption_status: Mapped[str] = mapped_column(
         String(32),
         nullable=False,
-        default="AVAILABLE",
     )
 
     admission_date: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),
         nullable=False,
+    )
+
+    stone: Mapped["StoneModel"] = relationship(
+        back_populates="shelter_case",
+        lazy="raise",
     )
 
     current_shelter: Mapped["ShelterModel"] = relationship(

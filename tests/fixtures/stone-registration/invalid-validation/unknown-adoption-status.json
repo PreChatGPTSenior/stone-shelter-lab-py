@@ -1,0 +1,24 @@
+{
+  "stone": {
+    "externalId": "49cf225d-800f-4dce-8eb5-af192d2449d5",
+    "name": "Sir Pebble",
+    "stoneType": "GRANITE",
+    "stoneSize": "SMALL",
+    "biography": "A thoughtful stone who enjoys quiet evenings."
+  },
+  "shelterCase": {
+    "externalId": "81518eaf-e216-4d7d-a1f0-e2bc02764d74",
+    "caseNumber": "0001-2026-P1",
+    "currentShelterId": "b222288c-1da8-4932-a7eb-75a55be41b87",
+    "admissionDate": "2026-10-30T09:00:00Z",
+    "events": [
+      {
+        "externalId": "ef332f68-dd63-4613-b50a-da34b3d7512a",
+        "eventType": "ADMITTED",
+        "occurredAt": "2026-10-30T09:00:00Z",
+        "eventNotes": "Accepted into shelter P1 and made available for adoption."
+      }
+    ],
+    "adoptionStatus": "UNKNOWN"
+  }
+}

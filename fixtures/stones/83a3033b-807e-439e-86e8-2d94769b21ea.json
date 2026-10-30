@@ -1,0 +1,30 @@
+{
+  "stone": {
+    "externalId": "83a3033b-807e-439e-86e8-2d94769b21ea",
+    "name": "Sunny Marble",
+    "stoneType": "MARBLE",
+    "stoneSize": "MEDIUM",
+    "biography": "Sunny Marble is a beloved resident of the fictional pet stone world."
+  },
+  "shelterCase": {
+    "externalId": "54038d58-3cf3-47e6-8d27-e4494089cd38",
+    "caseNumber": "0004-2026-P1",
+    "currentShelterId": "b222288c-1da8-4932-a7eb-75a55be41b87",
+    "admissionDate": "2026-10-01T09:00:00Z",
+    "events": [
+      {
+        "externalId": "712dcff3-3a2d-44f2-ad8f-1e158f2202b2",
+        "eventType": "ADMITTED",
+        "occurredAt": "2026-10-01T09:00:00Z",
+        "eventNotes": "Admitted to shelter P1 and made available for adoption."
+      },
+      {
+        "externalId": "dcaf78f1-c786-4c50-b41c-22b2ef04e1ae",
+        "eventType": "ADOPTED",
+        "occurredAt": "2026-10-02T09:00:00Z",
+        "eventNotes": "Adopted directly from AVAILABLE without a reservation."
+      }
+    ],
+    "adoptionStatus": "ADOPTED"
+  }
+}

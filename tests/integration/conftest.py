@@ -13,7 +13,6 @@ from fastapi import FastAPI
 from pydantic import SecretStr
 from testcontainers.community.postgres import PostgresContainer
 
-from stone_shelter.bootstrap.app import create_app
 from stone_shelter.settings import DatabaseSettings
 
 POSTGRES_IMAGE = (
@@ -89,6 +88,9 @@ async def app(
     migrated_database: DatabaseSettings,
     monkeypatch: pytest.MonkeyPatch,
 ) -> AsyncIterator[FastAPI]:
+    # Service integration tests do not depend on the HTTP application imports.
+    from stone_shelter.bootstrap.app import create_app
+
     monkeypatch.setattr(
         "stone_shelter.bootstrap.app.DatabaseSettings",
         lambda: migrated_database,

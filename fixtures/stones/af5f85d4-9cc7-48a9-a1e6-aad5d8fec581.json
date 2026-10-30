@@ -1,0 +1,58 @@
+{
+  "stone": {
+    "externalId": "af5f85d4-9cc7-48a9-a1e6-aad5d8fec581",
+    "name": "Velvet Slate",
+    "stoneType": "SLATE",
+    "stoneSize": "MEDIUM",
+    "biography": "Velvet Slate is a beloved resident of the fictional pet stone world."
+  },
+  "shelterCase": {
+    "externalId": "657a88e9-880b-4dfd-9b17-4d5518fb0d16",
+    "caseNumber": "0005-2026-P1",
+    "currentShelterId": "b222288c-1da8-4932-a7eb-75a55be41b87",
+    "admissionDate": "2026-10-01T09:00:00Z",
+    "events": [
+      {
+        "externalId": "ee88dc2a-83d5-4155-a8bc-05664966967f",
+        "eventType": "CARE_EVENT",
+        "occurredAt": "2026-10-05T09:00:00Z",
+        "eventNotes": "Received a calming blanket and a gentle surface inspection."
+      },
+      {
+        "externalId": "0deb7faa-0a1d-4fd5-ab85-38f3f89d7c54",
+        "eventType": "RETURNED",
+        "occurredAt": "2026-10-04T09:00:00Z",
+        "eventNotes": "Returned after a noisy household proved unsuitable."
+      },
+      {
+        "externalId": "b39af80d-86c9-44cb-97ad-9818aef37e72",
+        "eventType": "ADOPTED",
+        "occurredAt": "2026-10-03T09:00:00Z",
+        "eventNotes": "Adoption completed after reservation."
+      },
+      {
+        "externalId": "5ca7f30a-0289-45e9-ab37-20c3c8ab427c",
+        "eventType": "RESERVED",
+        "occurredAt": "2026-10-02T09:00:00Z",
+        "eventNotes": "Reserved by a prospective family."
+      },
+      {
+        "externalId": "78a329a1-330c-4ea2-bebc-9044ddde972b",
+        "eventType": "ADMITTED",
+        "occurredAt": "2026-10-01T09:00:00Z",
+        "eventNotes": "Admitted to shelter P1 and made available for adoption."
+      }
+    ],
+    "adoptionStatus": "RETURNED"
+  },
+  "profile": {
+    "socializationTraits": [
+      "PREFERS_SOLITUDE",
+      "NEEDS_SLOW_INTRODUCTION"
+    ],
+    "careLevel": "INTENSIVE",
+    "healthNotes": "A recurring surface crack needs close attention.",
+    "triggerNotes": "Distressed by loud music.",
+    "preferredEnvironment": "A peaceful home with an experienced caregiver."
+  }
+}

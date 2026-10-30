@@ -4,7 +4,7 @@ from uuid import UUID
 
 from pydantic import Field
 
-from stone_shelter.api.contracts import ApiRequest, ApiResponse
+from stone_shelter.api.contracts import ApiRequest
 from stone_shelter.catalog.enums import CareLevel, SocializationTrait, StoneSize, StoneType
 
 

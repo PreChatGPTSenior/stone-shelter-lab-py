@@ -1,0 +1,55 @@
+{
+  "stone": {
+    "externalId": "3b41b31d-5a1f-43ef-af77-c107bb7ae382",
+    "name": "Brave Gneiss",
+    "stoneType": "GNEISS",
+    "stoneSize": "MEDIUM",
+    "biography": "Brave Gneiss is a beloved resident of the fictional pet stone world."
+  },
+  "shelterCase": {
+    "externalId": "db95b9ad-383d-4294-b5c4-6bdba889b2d4",
+    "caseNumber": "0007-2026-P1",
+    "currentShelterId": "b222288c-1da8-4932-a7eb-75a55be41b87",
+    "admissionDate": "2026-10-01T09:00:00Z",
+    "events": [
+      {
+        "externalId": "824be6aa-5d96-4fd6-93f6-3a0510d159cc",
+        "eventType": "ADMITTED",
+        "occurredAt": "2026-10-01T09:00:00Z",
+        "eventNotes": "Admitted to shelter P1 and made available for adoption."
+      },
+      {
+        "externalId": "16630e89-0556-42cc-9ab5-4473eb4eb742",
+        "eventType": "ADOPTED",
+        "occurredAt": "2026-10-02T09:00:00Z",
+        "eventNotes": "Adopted without reservation."
+      },
+      {
+        "externalId": "d804e3ef-7a65-435c-bcbb-eccc1f3a8126",
+        "eventType": "RETURNED",
+        "occurredAt": "2026-10-03T09:00:00Z",
+        "eventNotes": "Returned for recovery and reassessment."
+      },
+      {
+        "externalId": "e2ee6da4-dd39-49ea-91a2-160ce8156862",
+        "eventType": "MADE_AVAILABLE",
+        "occurredAt": "2026-10-04T09:00:00Z",
+        "eventNotes": "Recovery completed; ready to meet another family."
+      },
+      {
+        "externalId": "4680986d-7f35-4723-9039-7e366bdbde19",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-05T09:00:00Z",
+        "eventNotes": "Enjoys friendly company and short garden visits."
+      }
+    ],
+    "adoptionStatus": "AVAILABLE"
+  },
+  "profile": {
+    "socializationTraits": [
+      "ENJOYS_HUMAN_COMPANY",
+      "GOOD_WITH_CHILDREN"
+    ],
+    "careLevel": "STANDARD"
+  }
+}

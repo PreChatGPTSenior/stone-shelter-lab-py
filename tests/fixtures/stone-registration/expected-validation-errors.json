@@ -1,0 +1,11 @@
+{
+  "missing-case.json": "missing",
+  "empty-history.json": "too_short",
+  "missing-admission.json": "CASE_ADMITTED_EVENT_REQUIRED",
+  "too-many-events.json": "CASE_EVENT_LIMIT_EXCEEDED",
+  "unknown-stone-type.json": "enum",
+  "blank-name.json": "string_too_short",
+  "event-without-timezone.json": "timezone_aware",
+  "missing-adoption-status.json": "missing",
+  "unknown-adoption-status.json": "enum"
+}

@@ -1,0 +1,36 @@
+{
+  "stone": {
+    "externalId": "9c09973a-5ece-4649-8923-eb210dd023ed",
+    "name": "Wandering Sandstone",
+    "stoneType": "SANDSTONE",
+    "stoneSize": "MEDIUM",
+    "biography": "Wandering Sandstone is a beloved resident of the fictional pet stone world."
+  },
+  "shelterCase": {
+    "externalId": "338599c9-4d15-48a7-8868-b48b7a44ba75",
+    "caseNumber": "0008-2026-P1",
+    "currentShelterId": "10ad5165-1b0c-4255-bfb8-ef6979d10e2b",
+    "admissionDate": "2026-10-01T09:00:00Z",
+    "events": [
+      {
+        "externalId": "af401427-ef14-43cc-b7cb-1640000e9a28",
+        "eventType": "ADMITTED",
+        "occurredAt": "2026-10-01T09:00:00Z",
+        "eventNotes": "Admitted to shelter P1 and made available for adoption."
+      },
+      {
+        "externalId": "c1a9230c-6aa2-4136-b206-b03494d792f5",
+        "eventType": "TRANSFERRED_P1_TO_P2",
+        "occurredAt": "2026-10-02T09:00:00Z",
+        "eventNotes": "Transferred from P1 to P2; lifetime case number preserved."
+      },
+      {
+        "externalId": "f2559f72-97bf-48fb-86df-2bce0f3e655e",
+        "eventType": "RESERVED",
+        "occurredAt": "2026-10-03T09:00:00Z",
+        "eventNotes": "Reserved by a family visiting shelter P2."
+      }
+    ],
+    "adoptionStatus": "RESERVED"
+  }
+}

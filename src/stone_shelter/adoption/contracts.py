@@ -5,7 +5,7 @@ from uuid import UUID
 from pydantic import AwareDatetime, Field, field_validator
 from pydantic_core import PydanticCustomError
 
-from stone_shelter.adoption.enums import CaseEventType
+from stone_shelter.adoption.enums import AdoptionStatus, CaseEventType
 from stone_shelter.api.contracts import ApiRequest
 
 
@@ -20,6 +20,7 @@ class ShelterCaseCreateRequest(ApiRequest):
     external_id: UUID = Field(alias="externalId")
     case_number: str = Field(min_length=1, alias="caseNumber")
     current_shelter_id: UUID = Field(alias="currentShelterId")
+    adoption_status: AdoptionStatus = Field(alias="adoptionStatus")
     admission_date: AwareDatetime = Field(alias="admissionDate")
     events: list[CaseEventCreateRequest] = Field(min_length=1)
 

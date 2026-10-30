@@ -1,10 +1,14 @@
 # ADR-0012 Use only clean Testcontainers databases during local development
 
-- Status: Accepted; effective until the owner explicitly changes the policy
+- Status: Partially superseded by [ADR-0014](0014-persistent-local-application-database.md); Testcontainers isolation remains required for tests and schema verification
 - Date: 2026-10-30
 - Tracking: [PY-009](https://github.com/PreChatGPTSenior/stone-shelter-lab-py/issues/10)
 - Related: [ADR-0010](0010-py-009-test-data-preparation.md) and [ADR-0011](0011-dto-to-orm-without-domain-dataclasses.md)
 - Scope: Database-backed development, schema generation, migration verification, and tests
+
+## Policy update
+
+The owner now permits a persistent local application database and explicitly requested retaining data between application restarts. ADR-0014 governs application setup and fixture loading. The original decision below is retained as historical context; it no longer prohibits the application from using local PostgreSQL.
 
 ## Context
 

@@ -1,0 +1,36 @@
+{
+  "stone": {
+    "externalId": "4a7ebdcb-0433-4d59-be40-9040e908ba66",
+    "name": "Mossy Limestone",
+    "stoneType": "LIMESTONE",
+    "stoneSize": "MEDIUM",
+    "biography": "Mossy Limestone is a beloved resident of the fictional pet stone world."
+  },
+  "shelterCase": {
+    "externalId": "f58620f5-f4d6-4eaa-b57b-6e80215ad84e",
+    "caseNumber": "0006-2026-P1",
+    "currentShelterId": "b222288c-1da8-4932-a7eb-75a55be41b87",
+    "admissionDate": "2026-10-01T09:00:00Z",
+    "events": [
+      {
+        "externalId": "ca328233-2163-406b-bdd2-9d8f686442f6",
+        "eventType": "ADMITTED",
+        "occurredAt": "2026-10-01T09:00:00Z",
+        "eventNotes": "Admitted to shelter P1 and made available for adoption."
+      },
+      {
+        "externalId": "4cf54b3f-6d6e-4033-bb3a-604c26a4f219",
+        "eventType": "RESERVED",
+        "occurredAt": "2026-10-02T09:00:00Z",
+        "eventNotes": "Reserved pending a family meeting."
+      },
+      {
+        "externalId": "8e0e6e1a-cb36-432a-b626-79f223935d23",
+        "eventType": "RESERVATION_ENDED",
+        "occurredAt": "2026-10-03T09:00:00Z",
+        "eventNotes": "Reservation ended; available again."
+      }
+    ],
+    "adoptionStatus": "AVAILABLE"
+  }
+}

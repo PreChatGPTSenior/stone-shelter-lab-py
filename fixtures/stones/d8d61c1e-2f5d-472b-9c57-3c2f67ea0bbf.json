@@ -1,0 +1,48 @@
+{
+  "stone": {
+    "externalId": "d8d61c1e-2f5d-472b-9c57-3c2f67ea0bbf",
+    "name": "Homeward Pumice",
+    "stoneType": "PUMICE",
+    "stoneSize": "MEDIUM",
+    "biography": "Homeward Pumice is a beloved resident of the fictional pet stone world."
+  },
+  "shelterCase": {
+    "externalId": "397c770a-9528-4d79-81b0-85129785e563",
+    "caseNumber": "0009-2026-P1",
+    "currentShelterId": "b222288c-1da8-4932-a7eb-75a55be41b87",
+    "admissionDate": "2026-10-01T09:00:00Z",
+    "events": [
+      {
+        "externalId": "84da93f5-8478-4653-9712-547099c2477e",
+        "eventType": "ADMITTED",
+        "occurredAt": "2026-10-01T09:00:00Z",
+        "eventNotes": "Admitted to shelter P1 and made available for adoption."
+      },
+      {
+        "externalId": "482e6749-9615-451b-90bb-50c0cd68bdbe",
+        "eventType": "TRANSFERRED_P1_TO_P2",
+        "occurredAt": "2026-10-02T09:00:00Z",
+        "eventNotes": "Transferred to P2 for a socialization programme."
+      },
+      {
+        "externalId": "a15f1741-4a75-48f9-9c2d-32ea2fb877dd",
+        "eventType": "TRANSFERRED_P2_TO_P1",
+        "occurredAt": "2026-10-03T09:00:00Z",
+        "eventNotes": "Returned to shelter P1 after completing the programme."
+      },
+      {
+        "externalId": "9e60b0d5-78cd-4b94-b7ba-b7a485514e62",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-04T09:00:00Z",
+        "eventNotes": "Enjoys the company of other stones."
+      }
+    ],
+    "adoptionStatus": "AVAILABLE"
+  },
+  "profile": {
+    "socializationTraits": [
+      "ENJOYS_OTHER_STONES"
+    ],
+    "careLevel": null
+  }
+}

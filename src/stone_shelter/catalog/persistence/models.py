@@ -1,5 +1,6 @@
 """Catalog SQLAlchemy mappings. Define tables and relationships for catalog-owned data. Keep transport schemas and adoption lifecycle state separate."""
 
+from typing import TYPE_CHECKING
 from uuid import UUID
 
 from sqlalchemy import ForeignKey, String, Text, Uuid
@@ -12,6 +13,9 @@ from stone_shelter.infrastructure.database.mixins import (
     UpdatedAtMixin,
     VersionedMixin,
 )
+
+if TYPE_CHECKING:
+    from stone_shelter.adoption.persistence.models import ShelterCaseModel
 
 
 class StoneModel(CreatedAtMixin, UpdatedAtMixin, VersionedMixin, Base):
@@ -28,6 +32,10 @@ class StoneModel(CreatedAtMixin, UpdatedAtMixin, VersionedMixin, Base):
     biography: Mapped[str | None] = mapped_column(String(2048))
     profile: Mapped["StoneProfileModel | None"] = relationship(
         back_populates="stone",
+    )
+    shelter_case: Mapped["ShelterCaseModel"] = relationship(
+        back_populates="stone",
+        lazy="raise",
     )
 
 

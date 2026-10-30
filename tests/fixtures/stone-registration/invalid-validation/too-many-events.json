@@ -1,0 +1,624 @@
+{
+  "stone": {
+    "externalId": "abcbd2b8-234c-4653-a9cf-d3c022073750",
+    "name": "Professor Quartzless",
+    "stoneType": "GRANITE",
+    "stoneSize": "MEDIUM",
+    "biography": "Professor Quartzless is a beloved resident of the fictional pet stone world."
+  },
+  "shelterCase": {
+    "externalId": "ad5c3c16-cbe4-4ebe-8800-4d957a3ce9e7",
+    "caseNumber": "0010-2026-P1",
+    "currentShelterId": "b222288c-1da8-4932-a7eb-75a55be41b87",
+    "admissionDate": "2026-10-01T09:00:00Z",
+    "events": [
+      {
+        "externalId": "5141b6de-031d-4657-b187-9c750d278ff7",
+        "eventType": "ADMITTED",
+        "occurredAt": "2026-10-01T09:00:00Z",
+        "eventNotes": "Admitted to shelter P1 and made available for adoption."
+      },
+      {
+        "externalId": "8d43c962-ee1d-4513-a39f-689086ede6db",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T09:01:00Z",
+        "eventNotes": "Observation 1: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "b3ac9617-8746-42b8-8a53-007856af4b8c",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T09:02:00Z",
+        "eventNotes": "Observation 2: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "4caa0962-e443-41e2-af36-0256c963125b",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T09:03:00Z",
+        "eventNotes": "Observation 3: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "b24acecc-cd62-4320-9e09-1a8ac2ea55bf",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T09:04:00Z",
+        "eventNotes": "Observation 4: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "e5af5499-8119-417b-bb83-51391b059b1f",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T09:05:00Z",
+        "eventNotes": "Observation 5: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "61086cd4-2af0-4038-be99-058f0ce02d9a",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T09:06:00Z",
+        "eventNotes": "Observation 6: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "fd19d3f8-3715-4686-a282-939fbc8cc644",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T09:07:00Z",
+        "eventNotes": "Observation 7: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "d85acdb4-0c33-4bcd-add6-1ca99b675527",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T09:08:00Z",
+        "eventNotes": "Observation 8: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "0782e980-1899-43c3-b7fe-cdfbf9241993",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T09:09:00Z",
+        "eventNotes": "Observation 9: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "80a1dd9b-be2c-4050-8526-acb2e1496284",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T09:10:00Z",
+        "eventNotes": "Observation 10: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "f5942bdf-b6fd-41d1-a4d3-10824e2c4104",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T09:11:00Z",
+        "eventNotes": "Observation 11: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "da3ec42c-70cb-4398-bf01-8d21aa9c90dd",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T09:12:00Z",
+        "eventNotes": "Observation 12: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "9a19ca85-ac89-44b7-a3f3-33caf62318d0",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T09:13:00Z",
+        "eventNotes": "Observation 13: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "95936be0-3089-464d-b27d-17a57418d599",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T09:14:00Z",
+        "eventNotes": "Observation 14: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "cabd22fa-8c91-458b-8da7-cec50f4b5770",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T09:15:00Z",
+        "eventNotes": "Observation 15: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "2d8cd336-e2ef-4b94-abce-ff6836a47508",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T09:16:00Z",
+        "eventNotes": "Observation 16: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "58974221-e65d-49e0-8ed0-f21658699c92",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T09:17:00Z",
+        "eventNotes": "Observation 17: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "36a94b5a-d19f-442c-b161-3bed06ca6410",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T09:18:00Z",
+        "eventNotes": "Observation 18: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "be577fe9-6548-4118-84c1-8b90854d4567",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T09:19:00Z",
+        "eventNotes": "Observation 19: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "ca066905-d7ea-4ff1-aaf3-ba2c2cd62587",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T09:20:00Z",
+        "eventNotes": "Observation 20: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "6cc9a5dd-9010-415d-954a-a2920e4c4caf",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T09:21:00Z",
+        "eventNotes": "Observation 21: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "de3b8c37-9ea4-4205-bd11-c3c28a3773de",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T09:22:00Z",
+        "eventNotes": "Observation 22: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "df3d7bc6-fc3c-46bb-bf88-52fca7655ca0",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T09:23:00Z",
+        "eventNotes": "Observation 23: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "13966c4a-ac78-4635-a334-677f073ebcab",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T09:24:00Z",
+        "eventNotes": "Observation 24: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "d9ff80b5-374b-4167-b2d4-288cd8383995",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T09:25:00Z",
+        "eventNotes": "Observation 25: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "8f515959-31b6-44ce-ac77-7bdb2626c42b",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T09:26:00Z",
+        "eventNotes": "Observation 26: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "5d6be447-ae34-4aa6-a3f3-ce2312d6a0e7",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T09:27:00Z",
+        "eventNotes": "Observation 27: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "bcebaa35-ec2c-4f6d-8379-537fc2358215",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T09:28:00Z",
+        "eventNotes": "Observation 28: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "c8ddbab2-4540-488a-ab2a-ce9ec204cfa9",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T09:29:00Z",
+        "eventNotes": "Observation 29: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "87da1fde-cc33-4c73-86d7-7808a267b95f",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T09:30:00Z",
+        "eventNotes": "Observation 30: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "90766845-2688-4a23-bb50-ab977e602207",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T09:31:00Z",
+        "eventNotes": "Observation 31: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "0fe72d3a-411a-4886-b7fe-2adf5f1524f5",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T09:32:00Z",
+        "eventNotes": "Observation 32: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "1972cbac-dec4-487c-9e5c-e16a588870aa",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T09:33:00Z",
+        "eventNotes": "Observation 33: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "698eba58-1f37-4785-90e0-819210f6a3b7",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T09:34:00Z",
+        "eventNotes": "Observation 34: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "5d2f9e95-33e2-48a9-ace0-589d3dae3349",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T09:35:00Z",
+        "eventNotes": "Observation 35: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "f45bcb84-409a-4624-a71e-a2bd4e1ef647",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T09:36:00Z",
+        "eventNotes": "Observation 36: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "357a5fb0-3127-441f-820e-b8590f82b265",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T09:37:00Z",
+        "eventNotes": "Observation 37: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "dc790c1b-4742-43e6-bf2e-33cde011e445",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T09:38:00Z",
+        "eventNotes": "Observation 38: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "e7b70c36-7253-4aaf-a346-75378bc55253",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T09:39:00Z",
+        "eventNotes": "Observation 39: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "fb17874f-f9ee-4465-ac18-971a3fb44bb0",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T09:40:00Z",
+        "eventNotes": "Observation 40: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "bf8e8e40-94c8-48eb-9e69-df912f3490de",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T09:41:00Z",
+        "eventNotes": "Observation 41: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "d0fc99d9-12db-484d-a2e0-4b0d5e1c0d63",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T09:42:00Z",
+        "eventNotes": "Observation 42: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "91b685e6-621c-4b95-b356-a2abc9b7b314",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T09:43:00Z",
+        "eventNotes": "Observation 43: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "3888a371-3447-4fef-8f43-6bcce41c3e4f",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T09:44:00Z",
+        "eventNotes": "Observation 44: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "47d2c913-56a0-4d54-959f-27219449e2f7",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T09:45:00Z",
+        "eventNotes": "Observation 45: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "103da571-7c8b-4dcc-9885-a648bc1f4aba",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T09:46:00Z",
+        "eventNotes": "Observation 46: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "38a7e2e3-3d37-414c-b672-bc7a053d8606",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T09:47:00Z",
+        "eventNotes": "Observation 47: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "63590f5f-4633-4634-8251-1f7a7afbdf63",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T09:48:00Z",
+        "eventNotes": "Observation 48: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "839a9449-8651-4221-905d-0a7d16a1f99b",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T09:49:00Z",
+        "eventNotes": "Observation 49: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "a758c4bb-93bf-4fac-a8cc-b6bd9aed82d9",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T09:50:00Z",
+        "eventNotes": "Observation 50: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "bdf2c653-ff8a-4fe8-8c72-8e62779c9433",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T09:51:00Z",
+        "eventNotes": "Observation 51: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "123a199c-f3b3-4b7a-abea-9504b44541ec",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T09:52:00Z",
+        "eventNotes": "Observation 52: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "6775125b-a135-4dae-8eed-9116891cf7d1",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T09:53:00Z",
+        "eventNotes": "Observation 53: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "0f39ea64-9946-4098-aec5-9aed43dbfcec",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T09:54:00Z",
+        "eventNotes": "Observation 54: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "50126516-6f51-4b86-b08b-fc3507e5f9a9",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T09:55:00Z",
+        "eventNotes": "Observation 55: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "f583193e-9195-4379-912b-a43f70aaaaf0",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T09:56:00Z",
+        "eventNotes": "Observation 56: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "5a7cd2a4-cfb7-4580-b941-4c3617846001",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T09:57:00Z",
+        "eventNotes": "Observation 57: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "bfd843ed-b654-42d6-aca3-7c3af9d875d2",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T09:58:00Z",
+        "eventNotes": "Observation 58: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "cb1cab80-394a-47dc-bb2c-eb726abeb94e",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T09:59:00Z",
+        "eventNotes": "Observation 59: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "3ad7cd49-5e25-4b80-8648-a66f6e5fe6f4",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T10:00:00Z",
+        "eventNotes": "Observation 60: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "1dcf6283-6988-4452-9cc2-b76f72763e50",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T10:01:00Z",
+        "eventNotes": "Observation 61: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "2562031c-d654-4cc0-99e4-5a9788c642d0",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T10:02:00Z",
+        "eventNotes": "Observation 62: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "e398ca63-9d40-417f-97f2-8c104a997562",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T10:03:00Z",
+        "eventNotes": "Observation 63: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "8368e6ad-aa24-415a-a0ee-0308ee60f3bc",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T10:04:00Z",
+        "eventNotes": "Observation 64: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "77af4fcf-e5c7-42ac-8b47-e5b8b93cc221",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T10:05:00Z",
+        "eventNotes": "Observation 65: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "26cc3ada-f168-4ca1-b123-da6c7e35bef2",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T10:06:00Z",
+        "eventNotes": "Observation 66: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "98b53311-1611-4a28-9464-fed154ab38ad",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T10:07:00Z",
+        "eventNotes": "Observation 67: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "490533b5-9a25-4624-be00-9794f79d0def",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T10:08:00Z",
+        "eventNotes": "Observation 68: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "4dbbe649-8fd0-4040-87d4-e25cb55d0fd9",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T10:09:00Z",
+        "eventNotes": "Observation 69: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "28dad781-f79b-4727-8a49-18b147362768",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T10:10:00Z",
+        "eventNotes": "Observation 70: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "7d9954b8-5c06-4041-bb50-b5e3f17ebcc0",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T10:11:00Z",
+        "eventNotes": "Observation 71: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "69316155-5151-4a87-b4f4-82c881e69213",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T10:12:00Z",
+        "eventNotes": "Observation 72: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "d34e3d3f-fa71-4ac3-9abe-34179164f487",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T10:13:00Z",
+        "eventNotes": "Observation 73: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "faf594f5-4fd2-47bf-b9c9-dc7343d45b4e",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T10:14:00Z",
+        "eventNotes": "Observation 74: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "048c61fa-6ba9-48cf-baf4-e664e676a4f6",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T10:15:00Z",
+        "eventNotes": "Observation 75: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "089cca69-a914-4c1b-9134-12dbf41e0c37",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T10:16:00Z",
+        "eventNotes": "Observation 76: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "28b31cd6-a95d-4b71-94cc-55245acc2483",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T10:17:00Z",
+        "eventNotes": "Observation 77: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "dd549b02-1720-4810-8a89-b282ef1ba54b",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T10:18:00Z",
+        "eventNotes": "Observation 78: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "3484b8ce-0e1f-4661-8743-ed1bafa000ee",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T10:19:00Z",
+        "eventNotes": "Observation 79: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "2fe6743e-a88a-4a95-bf5f-59a39f03dac7",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T10:20:00Z",
+        "eventNotes": "Observation 80: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "8fa5eb44-0b09-4723-bfc3-767b3480374b",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T10:21:00Z",
+        "eventNotes": "Observation 81: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "5ae357c1-f7ea-4f14-b313-c031f775290e",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T10:22:00Z",
+        "eventNotes": "Observation 82: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "86b55828-75be-410a-b298-74758fec59db",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T10:23:00Z",
+        "eventNotes": "Observation 83: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "65e6278a-9060-4749-99b7-12b7d5caa2b5",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T10:24:00Z",
+        "eventNotes": "Observation 84: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "b9a07829-dc0f-483f-8bb3-36d5b332cb67",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T10:25:00Z",
+        "eventNotes": "Observation 85: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "dedd4bb7-c852-4094-8fdf-13d783b9e7f4",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T10:26:00Z",
+        "eventNotes": "Observation 86: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "ae5645d2-9e3e-4f0f-8c01-a0ffc6c9bc76",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T10:27:00Z",
+        "eventNotes": "Observation 87: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "c796da6f-a700-4b9c-a90c-8fef4054df29",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T10:28:00Z",
+        "eventNotes": "Observation 88: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "1a452de6-3026-4b6d-bd99-f15aaef00218",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T10:29:00Z",
+        "eventNotes": "Observation 89: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "0f6ff5da-c65f-4ef3-823a-8a3ce49fdff3",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T10:30:00Z",
+        "eventNotes": "Observation 90: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "11c3b1a0-caf9-4515-b99b-f119172fed0b",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T10:31:00Z",
+        "eventNotes": "Observation 91: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "b04152d9-9e40-4a07-825d-a46e40e86f31",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T10:32:00Z",
+        "eventNotes": "Observation 92: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "22f3e2b5-6017-4af8-82a5-440155d788cc",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T10:33:00Z",
+        "eventNotes": "Observation 93: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "e7023c5a-3fbc-42e0-871b-743a55d376f2",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T10:34:00Z",
+        "eventNotes": "Observation 94: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "19058f52-539f-4fff-bb63-74f8c0f0024c",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T10:35:00Z",
+        "eventNotes": "Observation 95: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "336f2b65-a6b7-46ff-8c21-a755803e2a5d",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T10:36:00Z",
+        "eventNotes": "Observation 96: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "5fd88e78-7c4f-4a43-a736-8eacf51772de",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T10:37:00Z",
+        "eventNotes": "Observation 97: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "93114e7d-708f-4d38-8d00-aec8d4cccffd",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T10:38:00Z",
+        "eventNotes": "Observation 98: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "2f677e9f-874e-4140-ae64-85f23690f3f1",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T10:39:00Z",
+        "eventNotes": "Observation 99: remained calm during the supervised settling-in session."
+      },
+      {
+        "externalId": "42b56a14-3e35-4720-a35d-33679f83370e",
+        "eventType": "OBSERVATION",
+        "occurredAt": "2026-10-01T11:00:00Z",
+        "eventNotes": "This valid event exceeds the acceptance limit."
+      }
+    ],
+    "adoptionStatus": "AVAILABLE"
+  }
+}

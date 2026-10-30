@@ -1,0 +1,28 @@
+{
+  "stone": {
+    "externalId": "b32fbc0b-6bfb-4cee-acd7-1151b7b6d4a9",
+    "name": "Invalid Test Stone",
+    "stoneType": "BASALT",
+    "stoneSize": "MEDIUM",
+    "biography": "Invalid Test Stone is a beloved resident of the fictional pet stone world."
+  },
+  "shelterCase": {
+    "externalId": "2b09dfe0-0c98-4381-8afa-48c17e55e05f",
+    "caseNumber": "0900-2026-P1",
+    "currentShelterId": "b27fea3d-c816-4e81-b4c8-ded2c054a13f",
+    "admissionDate": "2026-10-01T09:00:00Z",
+    "events": [
+      {
+        "externalId": "65fe5e34-eea1-4866-8abf-84ddc4ddb123",
+        "eventType": "ADMITTED",
+        "occurredAt": "2026-10-01T09:00:00Z",
+        "eventNotes": "Admitted to shelter P1 and made available for adoption."
+      }
+    ],
+    "adoptionStatus": "AVAILABLE"
+  },
+  "profile": {
+    "careLevel": "ADDITIONAL",
+    "healthNotes": "Test-only profile for rollback verification."
+  }
+}
